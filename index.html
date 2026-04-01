@@ -134,6 +134,23 @@ body{
   opacity:.7;margin-bottom:.6em;text-transform:uppercase;
 }
 
+/* Benefit subtitle */
+.benefit-pill{
+  display:block;
+  font-family:'Jost',sans-serif;
+  font-size:clamp(13px,1.3vw,17px);
+  font-weight:300;
+  color:rgba(130,200,155,.95);
+  letter-spacing:.04em;
+  line-height:1.4;
+  margin-top:.3vh;
+  margin-bottom:.8vh;
+}
+.title-block{display:flex;flex-direction:column;}
+.title-block .eyebrow{order:1;}
+.title-block h1,.title-block h2{order:2;}
+.title-block .benefit-pill{order:3;}
+
 /* ── DECORATIVE ── */
 .rule{width:40px;height:1px;background:var(--gold);opacity:.5;margin:1.4em 0;}
 .rule-c{width:40px;height:1px;background:var(--gold);opacity:.5;margin:1.4em auto;}
@@ -401,7 +418,8 @@ body{
 }
 #s6 .rt-green{border-color:var(--green-light);color:var(--green-pale);}
 #s6 .rt-gold{border-color:var(--gold);color:var(--gold-light);}
-#s6 .imgs{display:flex;gap:1.2vw;flex:1;min-height:0;margin-top:1.5vh;}
+#s6 .imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:.8vw;flex:1;min-height:0;margin-top:1.5vh;}
+#s10 .img-top{margin-bottom:1.5vh;}
 
 /* ──────────────────────────────────────
    SLIDE 6 — AI PLANTENZORG (6-foto grid)
@@ -540,7 +558,7 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">Toekomstscenario</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Energie-onafhankelijk · Mens centraal · Toekomstbestendig</div>
+      <div class="benefit-pill">Energie-onafhankelijk · Mens centraal · Toekomstbestendig</div>
       <h2 class="headline">Waarom De Groene <em>Batterij?</em></h2>
     </div>
     <div class="two-col">
@@ -605,7 +623,7 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">Veldonderzoek · Primaire bron 2025</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Meer tijd voor de klant — minder tijd voor routinetaken</div>
+      <div class="benefit-pill">Meer tijd voor de klant — minder tijd voor routinetaken</div>
       <h2 class="headline-sm">De stem van de <em>medewerker</em></h2>
     </div>
     <div class="two-col">
@@ -651,7 +669,7 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">Scenario · Businessmodel 2030</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Lagere energiekosten · Sterkere buurtband · Onkopieerbaar voordeel</div>
+      <div class="benefit-pill">Lagere energiekosten · Sterkere buurtband · Onkopieerbaar voordeel</div>
       <h2 class="headline-sm">Van tuincentrum naar <em>energiehub.</em></h2>
     </div>
     <!-- Tekst over volledige breedte bovenaan -->
@@ -699,8 +717,8 @@ body{
   <div class="route-split">
     <div class="rh left">
       <div class="rt rt-green">Route A</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Van winkel naar beleving — klanten komen terug voor de ervaring</div>
       <h2 class="headline-sm">De <em>Beleving</em></h2>
+      <div class="benefit-pill">Van winkel naar beleving — klanten komen terug voor de ervaring</div>
       <p class="subline" style="margin-top:.6em;font-size:clamp(13px,1.35vw,18px);font-weight:300;">Route A is een uitgestippelde route door de hele winkel. Immersive zones met licht, geur en geluid vertellen het verhaal van elke plantencategorie. Op het klimaatplein zijn de tuinsets van de winkel gebruikt om een echt terras op te bouwen — inclusief koffiehoek. Klanten kunnen de meubels uitproberen terwijl ze genieten van een kopje koffie.</p>
       <p class="body-sm" style="margin-top:.8vh;font-size:clamp(12px,1.2vw,15px);font-weight:300;">Bij alle planten staan stijlvolle informatieve bordjes. Het is bijna een attractie — maar klanten kunnen gewoon zelf hun favoriete plantje uitkiezen en meenemen. Geen museum, maar een echte beleving én een winkel tegelijk.</p>
       <div class="imgs">
@@ -721,8 +739,8 @@ body{
     <div style="width:1px;background:rgba(255,255,255,.08);margin:6vh 0 8vh;flex-shrink:0;"></div>
     <div class="rh">
       <div class="rt rt-gold">Route B</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Respect voor de drukke klant — snel en efficiënt</div>
       <h2 class="headline-sm">Click &amp; <em>Collect</em></h2>
+      <div class="benefit-pill">Respect voor de drukke klant — snel en efficiënt</div>
       <p class="subline" style="margin-top:.6em;font-size:clamp(13px,1.35vw,18px);font-weight:300;">Weet je wat je nodig hebt? Kies bij de ingang bewust voor Route B. Je gaat direct naar de servicebalie of hebt online al besteld. De medewerker of het systeem regelt alles. Binnen 5 à 10 minuten sta je weer buiten — met precies wat je nodig had.</p>
       <div class="imgs">
         <div class="img-ph" id="s6-foto-e" style="flex:1;min-height:0;">
@@ -744,7 +762,7 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">AI · Operationeel</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Sensoren doen het speurwerk — medewerkers houden tijd over voor de klant</div>
+      <div class="benefit-pill">Sensoren doen het speurwerk — medewerkers houden tijd over voor de klant</div>
       <h2 class="headline-sm">De plant vertelt wat hij <em>nodig heeft.</em></h2>
     </div>
     <div class="two-col">
@@ -820,7 +838,7 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">AI · In de winkel</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Niet generiek advies — maar advies dat past bij jóuw tuin</div>
+      <div class="benefit-pill">Niet generiek advies — maar advies dat past bij jóuw tuin</div>
       <h2 class="headline-sm">Scan. Vraag. <em>Ontvang advies op maat.</em></h2>
     </div>
     <div class="two-col">
@@ -876,7 +894,7 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">AR/VR · Tuinontwerp op maat</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Geen gokken meer — klanten zien hun tuin zoals die er écht uit gaat zien</div>
+      <div class="benefit-pill">Geen gokken meer — klanten zien hun tuin zoals die er écht uit gaat zien</div>
       <h2 class="headline-sm">Ontwerp je tuin, nog voor je een plant koopt.</h2>
     </div>
     <!-- Grote panoramafoto bovenaan -->
@@ -917,7 +935,7 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">AR/VR · Thuis &amp; onderweg</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Het tuincentrum helpt je ook thuis — niet alleen in de winkel</div>
+      <div class="benefit-pill">Het tuincentrum helpt je ook thuis — niet alleen in de winkel</div>
       <h2 class="headline-sm">Jouw tuin. <em>Altijd een expert in je zak.</em></h2>
     </div>
     <div class="two-col">
@@ -961,7 +979,7 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">AR/VR · Experimenteerzone</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Geen verrassingen na de winter — alles al doorgespeeld in VR</div>
+      <div class="benefit-pill">Geen verrassingen na de winter — alles al doorgespeeld in VR</div>
       <h2 class="headline-sm">Ontwerp je eigen tuin — <em>zonder risico.</em></h2>
     </div>
     <div class="two-col">
@@ -1010,7 +1028,7 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">Web3 · Loyaliteit</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Goed voor het milieu loont letterlijk — elke duurzame keuze wordt beloond</div>
+      <div class="benefit-pill">Goed voor het milieu loont letterlijk — elke duurzame keuze wordt beloond</div>
       <h2 class="headline-sm">Grow Tokens — <em>Goed gedrag beloond.</em></h2>
     </div>
     <div class="two-col">
@@ -1046,7 +1064,7 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">Web3 · Blockchain vs Traditioneel</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Loyaliteit die écht van jou is — nooit meer verlopen punten</div>
+      <div class="benefit-pill">Loyaliteit die écht van jou is — nooit meer verlopen punten</div>
       <h2 class="headline-sm">Van spaarpunten naar <em>echte waarde.</em></h2>
     </div>
     <div class="compare-wrap">
@@ -1098,7 +1116,7 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">Web3 · Digitale gemeenschap</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Jouw tuin is van jou — ook digitaal, ook voor altijd</div>
+      <div class="benefit-pill">Jouw tuin is van jou — ook digitaal, ook voor altijd</div>
       <h2 class="headline-sm">Jouw tuin. Online. <em>Van jou.</em></h2>
     </div>
     <div class="two-col">
@@ -1157,7 +1175,7 @@ body{
     <!-- Title block — fixed, does not overlap -->
     <div class="title-block">
       <div class="eyebrow">Sociale Robots · Klantbeleving</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Technologie trekt klanten — mensen houden ze vast</div>
+      <div class="benefit-pill">Technologie trekt klanten — mensen houden ze vast</div>
       <h2 class="headline-sm">De robot als gastheer. <em>De medewerker als expert.</em></h2>
     </div>
     <!-- Highlight bar below title -->
@@ -1193,34 +1211,28 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">Sociale Robots · Medewerkerondersteuning</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Minder uren aan routinetaken — meer energie voor wat echt telt</div>
+      <div class="benefit-pill">Minder uren aan routinetaken — meer energie voor wat echt telt</div>
       <h2 class="headline-sm">Robots nemen het harde werk over — <em>medewerkers houden tijd voor de klant.</em></h2>
     </div>
-    <!-- Twee secties naast elkaar -->
-    <div style="display:flex;gap:2.5vw;flex:1;min-height:0;">
-      <!-- Sectie 1: Nacht-Scout -->
-      <div style="flex:1;display:flex;flex-direction:column;gap:1vh;min-height:0;">
+    <!-- Tekst bovenaan: beide secties naast elkaar -->
+    <div style="display:flex;gap:2.5vw;flex-shrink:0;">
+      <div style="flex:1;display:flex;flex-direction:column;gap:.5vh;">
         <p class="body-sm" style="font-weight:400;color:rgba(255,255,255,.85);">🌙 De Nacht-Scout — voorraadbeheer</p>
         <p class="body-sm">Elke nacht na sluitingstijd rijdt deze robot door de winkel. Iedere plant heeft een NFC-chip. De robot detecteert alle chips, vergelijkt met het systeem en genereert automatisch een voorraadrapport. 's Ochtends weet de medewerker precies wat aangevuld moet worden — zonder er zelf doorheen te zijn gelopen. Tijdwinst: 30 tot 50 uur per week.</p>
-        <div class="img-ph" id="s19-foto-a" style="flex:1;min-height:0;">
-          <span class="ph-ico">🌿</span><span class="ph-lbl">s19-foto-a</span><img src="" alt="">
-        </div>
       </div>
-      <!-- Sectie 2: Watergever -->
-      <div style="flex:1;display:flex;flex-direction:column;gap:1vh;min-height:0;">
+      <div style="flex:1;display:flex;flex-direction:column;gap:.5vh;">
         <p class="body-sm" style="font-weight:400;color:rgba(255,255,255,.85);">💧 De Watergever — slimme irrigatie</p>
         <p class="body-sm">Op basis van de sensordata van de planten rijdt de watergever gericht langs de plantenbakken die water nodig hebben. Elke zone heeft een eigen waterrooster. Medewerkers hoeven nooit meer handmatig te controleren of planten genoeg water hebben gehad.</p>
-        <div class="img-ph" id="s19-foto-b" style="flex:1;min-height:0;">
-          <span class="ph-ico">🌿</span><span class="ph-lbl">s19-foto-b</span><img src="" alt="">
-        </div>
       </div>
     </div>
-    <!-- Brede foto onderaan -->
-    <div style="flex-shrink:0;height:18%;margin-top:1vh;display:flex;flex-direction:column;gap:.4vh;">
-      <div class="img-ph" id="s19-foto-c" style="flex:1;min-height:0;">
-        <span class="ph-ico">🌿</span><span class="ph-lbl">s19-foto-c</span><img src="" alt="">
+    <!-- Foto's onderaan: gelijke hoogte, bovenkant uitgelijnd -->
+    <div style="display:flex;gap:2.5vw;flex:1;min-height:0;margin-top:1vh;">
+      <div class="img-ph" id="s19-foto-a" style="flex:1;min-height:0;">
+        <span class="ph-ico">🌿</span><span class="ph-lbl">s19-foto-a</span><img src="" alt="">
       </div>
-      <p style="font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:200;color:rgba(255,255,255,.4);text-align:center;flex-shrink:0;">Dashboard: medewerker ziet 's ochtends direct wat er 's nachts is gedaan</p>
+      <div class="img-ph" id="s19-foto-b" style="flex:1;min-height:0;">
+        <span class="ph-ico">🌿</span><span class="ph-lbl">s19-foto-b</span><img src="" alt="">
+      </div>
     </div>
   </div>
 </div>
@@ -1230,7 +1242,7 @@ body{
   <div class="sl">
     <div class="title-block">
       <div class="eyebrow">Sociale Robots · Klantgemak</div>
-      <div class="benefit-pill" style="display:inline-block;background:rgba(82,160,110,.25);border:1px solid rgba(82,160,110,.4);color:rgba(255,255,255,.85);font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:500;letter-spacing:.1em;padding:.3em .9em;border-radius:20px;margin-bottom:.6vh;">Winkelen zonder gezwoeg — ook met een volle wagen</div>
+      <div class="benefit-pill">Winkelen zonder gezwoeg — ook met een volle wagen</div>
       <h2 class="headline-sm">Een winkelwagen die <em>met je meedenkt.</em></h2>
     </div>
     <div class="three-col">

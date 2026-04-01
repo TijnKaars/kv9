@@ -931,34 +931,28 @@ body{
       <div class="benefit-pill">Geen gokken meer — klanten zien hun tuin zoals die er écht uit gaat zien</div>
       <h2 class="headline-sm">Ontwerp je tuin, nog voor je een plant koopt.</h2>
     </div>
-    <!-- Grote panoramafoto bovenaan -->
-    <div class="img-top">
-      <div class="img-ph" id="s10-foto-a" style="height:100%;">
+    <!-- Tekst direct onder de subtitel -->
+    <div style="flex-shrink:0;display:flex;flex-direction:column;gap:.6vh;margin-bottom:1.5vh;">
+      <p class="body-sm" style="font-size:clamp(12px,1.2vw,15px);font-weight:300;">In het tuincentrum staat een VR-ontwerpstation. De klant brengt thuis gemaakte foto's van zijn tuin mee. Het systeem combineert deze foto's met satellietdata om de exacte afmetingen, zonsinval en schaduwplekken te berekenen.</p>
+      <p class="body-sm" style="font-size:clamp(12px,1.2vw,15px);font-weight:300;">Met een VR-bril loopt de klant vervolgens letterlijk door een digitale simulatie van zijn eigen tuin — op schaal, met de juiste lichtinval. Planten die de klant uitkiest verschijnen direct in de simulatie. Tevreden? Alles gaat automatisch naar het winkelmandje.</p>
+      <ol style="font-family:'Jost',sans-serif;font-size:clamp(10px,.95vw,12px);font-weight:200;color:rgba(255,255,255,.5);line-height:1.8;padding-left:1.2em;margin-top:.3vh;">
+        <li>Thuis foto's maken van je tuin</li>
+        <li>Systeem berekent afmetingen en zonsinval via satellietdata</li>
+        <li>In het tuincentrum: VR-bril op, door je eigen tuin lopen</li>
+        <li>Planten uitkiezen en direct zien hoe ze passen</li>
+        <li>Tevreden? Alles naar het winkelmandje</li>
+      </ol>
+    </div>
+    <!-- Drie gelijke foto's onderin -->
+    <div style="flex:1;display:flex;gap:1.5vw;min-height:0;">
+      <div class="img-ph" id="s10-foto-a" style="flex:1;min-height:0;">
         <span class="ph-ico">🌿</span><span class="ph-lbl">s10-foto-a</span><img src="" alt="">
       </div>
-    </div>
-    <!-- Onderste rij: tekst links + twee foto's rechts -->
-    <div class="bottom-row">
-      <div class="b-col-text">
-        <p class="body-sm" style="font-size:clamp(12px,1.2vw,15px);font-weight:300;">In het tuincentrum staat een VR-ontwerpstation. De klant brengt thuis gemaakte foto's van zijn tuin mee. Het systeem combineert deze foto's met satellietdata om de exacte afmetingen, zonsinval en schaduwplekken te berekenen.</p>
-        <p class="body-sm" style="font-size:clamp(12px,1.2vw,15px);font-weight:300;">Met een VR-bril loopt de klant vervolgens letterlijk door een digitale simulatie van zijn eigen tuin — op schaal, met de juiste lichtinval. Planten die de klant uitkiest verschijnen direct in de simulatie. Tevreden? Alles gaat automatisch naar het winkelmandje.</p>
-        <ol style="font-family:'Jost',sans-serif;font-size:clamp(10px,.95vw,12px);font-weight:200;color:rgba(255,255,255,.5);line-height:1.8;padding-left:1.2em;margin-top:.5vh;">
-          <li>Thuis foto's maken van je tuin</li>
-          <li>Systeem berekent afmetingen en zonsinval via satellietdata</li>
-          <li>In het tuincentrum: VR-bril op, door je eigen tuin lopen</li>
-          <li>Planten uitkiezen en direct zien hoe ze passen</li>
-          <li>Tevreden? Alles naar het winkelmandje</li>
-        </ol>
+      <div class="img-ph" id="s10-foto-b" style="flex:1;min-height:0;">
+        <span class="ph-ico">🌿</span><span class="ph-lbl">s10-foto-b</span><img src="" alt="">
       </div>
-      <div class="b-col">
-        <div class="img-ph" id="s10-foto-b" style="flex:1;min-height:0;">
-          <span class="ph-ico">🌿</span><span class="ph-lbl">s10-foto-b</span><img src="" alt="">
-        </div>
-      </div>
-      <div class="b-col">
-        <div class="img-ph" id="s10-foto-c" style="flex:1;min-height:0;">
-          <span class="ph-ico">🌿</span><span class="ph-lbl">s10-foto-c</span><img src="" alt="">
-        </div>
+      <div class="img-ph" id="s10-foto-c" style="flex:1;min-height:0;">
+        <span class="ph-ico">🌿</span><span class="ph-lbl">s10-foto-c</span><img src="" alt="">
       </div>
     </div>
   </div>
@@ -1108,48 +1102,78 @@ body{
       <div class="eyebrow">Web3 · Plantenpaspoort</div>
       <div class="benefit-pill">Van zaad tot jouw tuin — elk verhaal opgeslagen, voor altijd</div>
       <h2 class="headline-sm">Het paspoort van <em>elke plant.</em></h2>
+      <div style="font-family:'Jost',sans-serif;font-size:clamp(12px,1.2vw,16px);font-weight:300;color:rgba(255,255,255,.65);margin-top:.4vh;">Van kwekerij tot jouw tuin — het hele verhaal in één scan.</div>
     </div>
-    <div class="compare-wrap">
-      <!-- Without -->
-      <div class="cc cc-old">
-        <div class="cc-head">❌ Zonder paspoort</div>
-        <div class="cc-img">
-          <div class="img-ph" id="s16-foto-a" style="height:100%;">
-            <span class="ph-ico">🌿</span><span class="ph-lbl">s16-foto-a</span><img src="" alt="">
+    <!-- Twee kolommen: tijdlijn links, foto's rechts -->
+    <div style="display:flex;gap:2.5vw;flex:1;min-height:0;">
+      <!-- Tijdlijn (brede linkerkolom) -->
+      <div style="flex:1.4;display:flex;flex-direction:column;justify-content:center;position:relative;padding-left:1.2vw;">
+        <!-- Verticale gouden lijn -->
+        <div style="position:absolute;left:calc(1.2vw + 11px);top:5%;bottom:5%;width:1px;background:linear-gradient(to bottom,rgba(212,168,83,0),rgba(212,168,83,.55) 12%,rgba(212,168,83,.55) 88%,rgba(212,168,83,0));"></div>
+        <!-- Stap 1 -->
+        <div style="display:flex;align-items:flex-start;gap:.8vw;padding:.55vh 0;">
+          <div style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(212,168,83,.15);border:1px solid rgba(212,168,83,.5);display:flex;align-items:center;justify-content:center;font-size:11px;z-index:1;">🌱</div>
+          <div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(10px,.95vw,13px);font-weight:600;color:rgba(255,255,255,.9);line-height:1.2;">Kwekerij</div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.8vw,11px);font-weight:200;color:rgba(255,255,255,.45);line-height:1.3;">Naam, locatie, kweekwijze en certificering vastgelegd op het moment van aanplant</div>
           </div>
         </div>
-        <div class="cc-bottom">
-          <div class="cmp-item"><span class="cmp-dot cmp-dim"></span>Onbekende herkomst</div>
-          <div class="cmp-item"><span class="cmp-dot cmp-dim"></span>Geen CO₂-inzicht</div>
-          <div class="cmp-item"><span class="cmp-dot cmp-dim"></span>Generiek verzorgingsadvies</div>
-          <div class="cmp-item"><span class="cmp-dot cmp-dim"></span>Niet overdraagbaar</div>
-          <div class="cmp-item"><span class="cmp-dot cmp-dim"></span>Geen historie bij doorverkoop</div>
-        </div>
-      </div>
-      <!-- With -->
-      <div class="cc cc-new">
-        <div class="cc-head">✓ NFT Plantenpaspoort</div>
-        <div class="cc-img">
-          <div class="img-ph" id="s16-foto-b" style="height:100%;">
-            <span class="ph-ico">🌿</span><span class="ph-lbl">s16-foto-b</span><img src="" alt="">
+        <!-- Stap 2 -->
+        <div style="display:flex;align-items:flex-start;gap:.8vw;padding:.55vh 0;">
+          <div style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(212,168,83,.15);border:1px solid rgba(212,168,83,.5);display:flex;align-items:center;justify-content:center;font-size:11px;z-index:1;">🚛</div>
+          <div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(10px,.95vw,13px);font-weight:600;color:rgba(255,255,255,.9);line-height:1.2;">Transport</div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.8vw,11px);font-weight:200;color:rgba(255,255,255,.45);line-height:1.3;">CO₂-uitstoot, afgelegde afstand en aankomstdatum automatisch geregistreerd</div>
           </div>
         </div>
-        <div class="cc-bottom">
-          <div class="cmp-item bright"><span class="cmp-dot cmp-bright"></span>Kwekerij &amp; reisroute vastgelegd</div>
-          <div class="cmp-item bright"><span class="cmp-dot cmp-bright"></span>Exacte CO₂-voetafdruk</div>
-          <div class="cmp-item bright"><span class="cmp-dot cmp-bright"></span>Persoonlijk verzorgingsplan</div>
-          <div class="cmp-item bright"><span class="cmp-dot cmp-bright"></span>Gaat mee naar nieuwe eigenaar</div>
-          <div class="cmp-item bright"><span class="cmp-dot cmp-bright"></span>Levenslange verzorgingshistorie</div>
+        <!-- Stap 3 -->
+        <div style="display:flex;align-items:flex-start;gap:.8vw;padding:.55vh 0;">
+          <div style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(212,168,83,.15);border:1px solid rgba(212,168,83,.5);display:flex;align-items:center;justify-content:center;font-size:11px;z-index:1;">🏪</div>
+          <div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(10px,.95vw,13px);font-weight:600;color:rgba(255,255,255,.9);line-height:1.2;">Tuincentrum</div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.8vw,11px);font-weight:200;color:rgba(255,255,255,.45);line-height:1.3;">Aankomstdatum en kwaliteitscheck toegevoegd aan het paspoort</div>
+          </div>
+        </div>
+        <!-- Stap 4 — sleutelmoment, uitgelicht -->
+        <div style="display:flex;align-items:flex-start;gap:.8vw;padding:.6vh .7vw;background:rgba(82,180,100,.12);border:1px solid rgba(82,180,100,.28);border-radius:6px;margin:.4vh 0;">
+          <div style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(82,180,100,.3);border:1px solid rgba(82,180,100,.7);display:flex;align-items:center;justify-content:center;font-size:11px;z-index:1;">🛒</div>
+          <div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(10px,.95vw,13px);font-weight:700;color:rgba(130,200,155,.95);line-height:1.2;">Jouw aankoop</div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.8vw,11px);font-weight:300;color:rgba(255,255,255,.6);line-height:1.3;">Op het moment van aankoop wordt het NFT-paspoort aangemaakt en aan jouw account gekoppeld</div>
+          </div>
+        </div>
+        <!-- Stap 5 -->
+        <div style="display:flex;align-items:flex-start;gap:.8vw;padding:.55vh 0;">
+          <div style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(212,168,83,.15);border:1px solid rgba(212,168,83,.5);display:flex;align-items:center;justify-content:center;font-size:11px;z-index:1;">🏡</div>
+          <div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(10px,.95vw,13px);font-weight:600;color:rgba(255,255,255,.9);line-height:1.2;">Jouw tuin</div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.8vw,11px);font-weight:200;color:rgba(255,255,255,.45);line-height:1.3;">Alles wat jij doet wordt bijgehouden — jouw persoonlijke verzorgingslog groeit hier</div>
+          </div>
+        </div>
+        <!-- Stap 6 -->
+        <div style="display:flex;align-items:flex-start;gap:.8vw;padding:.55vh 0;">
+          <div style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(212,168,83,.15);border:1px solid rgba(212,168,83,.5);display:flex;align-items:center;justify-content:center;font-size:11px;z-index:1;">🎁</div>
+          <div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(10px,.95vw,13px);font-weight:600;color:rgba(255,255,255,.9);line-height:1.2;">Nieuwe eigenaar</div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.8vw,11px);font-weight:200;color:rgba(255,255,255,.45);line-height:1.3;">Geef je de plant weg? Het paspoort wordt overgedragen met de volledige geschiedenis erbij</div>
+          </div>
         </div>
       </div>
-      <!-- Side text -->
-      <div class="cc-side">
-        <div class="glow-box">
-          <p>Het paspoort wordt aangemaakt op het moment van aankoop en is gekoppeld aan jouw account. Geef je de plant weg? Het paspoort gaat mee — met volledige history.</p>
+      <!-- Twee foto's (smallere rechterkolom) -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:1.2vh;min-height:0;">
+        <div class="img-ph" id="s16-foto-a" style="flex:1;min-height:0;">
+          <span class="ph-ico">🌿</span><span class="ph-lbl">s16-foto-a</span><img src="" alt="">
         </div>
-        <p class="body-sm" style="font-size:clamp(12px,1.2vw,15px);font-weight:300;">Elk paspoort bevat: kwekerij, transportroute, CO₂-uitstoot, waterverbruik en jouw persoonlijke verzorgingslog.</p>
+        <div class="img-ph" id="s16-foto-b" style="flex:1;min-height:0;">
+          <span class="ph-ico">🌿</span><span class="ph-lbl">s16-foto-b</span><img src="" alt="">
+        </div>
       </div>
     </div>
+    <!-- Glow-box volledige breedte -->
+    <div class="glow-box" style="flex-shrink:0;margin-top:1.2vh;">
+      <p>Het paspoort leeft op de blockchain — niemand kan het verwijderen, ook het tuincentrum niet. Het is van jou.</p>
+    </div>
+    <p class="body-sm" style="font-size:clamp(11px,1.1vw,14px);font-weight:200;color:rgba(255,255,255,.4);flex-shrink:0;margin-top:.5vh;">Elk paspoort bevat: kwekerij, transportroute, CO₂-uitstoot, waterverbruik en jouw persoonlijke verzorgingslog.</p>
   </div>
 </div>
 

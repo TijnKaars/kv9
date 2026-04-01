@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De Groene Batterij — 2030</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --cream:#f5f0e8;
+  --green-deep:#0d1f14;
+  --green-mid:#1a3d26;
+  --green:#2d6a42;
+  --green-light:#52a06e;
+  --green-pale:#a8d5b5;
+  --gold:#c9a84c;
+  --gold-light:#e8d5a0;
+  --white:rgba(255,255,255,0.95);
+  --white-dim:rgba(255,255,255,0.6);
+  --white-ghost:rgba(255,255,255,0.12);
+}
+
+body{
+  font-family:'Jost',sans-serif;
+  background:#000;
+  overflow:hidden;
+  width:100vw;height:100vh;
+  cursor:none;
+}
+
+.cursor{
+  position:fixed;width:8px;height:8px;
+  background:var(--gold);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .2s,height .2s;
+  mix-blend-mode:difference;
+}
+
+/* ── SLIDE ENGINE ── */
+.deck{position:fixed;inset:0;}
+.slide{
+  position:absolute;inset:0;
+  opacity:0;pointer-events:none;
+  transition:opacity .8s cubic-bezier(.4,0,.2,1);
+}
+.slide.active{opacity:1;pointer-events:all;}
+
+/* ── SHARED BACKGROUNDS ── */
+.bg-s1{background:radial-gradient(ellipse 60% 40% at 70% 60%,rgba(180,120,30,.25) 0%,transparent 70%),radial-gradient(ellipse 80% 60% at 30% 40%,rgba(20,60,30,.6) 0%,transparent 80%),linear-gradient(160deg,#040e07 0%,#0d2415 40%,#081a0f 70%,#030a05 100%);}
+.bg-s2{background:radial-gradient(ellipse 50% 70% at 80% 50%,rgba(40,80,50,.4) 0%,transparent 60%),linear-gradient(135deg,#060f09 0%,#0e1f14 50%,#060d08 100%);}
+.bg-s3{background:radial-gradient(ellipse 70% 80% at 60% 40%,rgba(140,90,20,.3) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 20% 70%,rgba(20,50,28,.7) 0%,transparent 70%),linear-gradient(150deg,#0a1a0c 0%,#1a2e14 40%,#0c1a0a 100%);}
+.bg-s5{background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(10,40,80,.7) 0%,transparent 70%),radial-gradient(ellipse 30% 30% at 75% 25%,rgba(50,120,200,.2) 0%,transparent 60%),linear-gradient(135deg,#020810 0%,#071525 50%,#030c18 100%);}
+.bg-s6{background:linear-gradient(to right,rgba(10,30,15,.95) 0%,rgba(10,30,15,.7) 48%,rgba(5,15,25,.7) 52%,rgba(5,15,25,.95) 100%),linear-gradient(135deg,#081208 0%,#0f2510 50%,#08100a 100%);}
+.bg-s7{background:radial-gradient(ellipse 50% 60% at 65% 45%,rgba(20,80,35,.5) 0%,transparent 65%),radial-gradient(ellipse 30% 40% at 30% 60%,rgba(10,50,60,.4) 0%,transparent 60%),linear-gradient(140deg,#050f07 0%,#0d2014 60%,#050e06 100%);}
+.bg-s9{background:linear-gradient(to right,rgba(10,25,12,.85) 0%,rgba(15,40,20,.6) 40%,rgba(25,15,40,.6) 60%,rgba(15,8,30,.85) 100%),linear-gradient(135deg,#060b07 0%,#0d1a10 30%,#120820 60%,#080510 100%);}
+.bg-s10{background:radial-gradient(ellipse 40% 80% at 50% 40%,rgba(150,110,30,.2) 0%,transparent 70%),radial-gradient(ellipse 80% 40% at 50% 80%,rgba(10,40,15,.8) 0%,transparent 80%),linear-gradient(180deg,#050e07 0%,#0d2010 30%,#162a12 60%,#0a1a0c 100%);}
+.bg-s11{background:radial-gradient(ellipse 60% 60% at 35% 50%,rgba(30,80,50,.4) 0%,transparent 65%),linear-gradient(140deg,#050e07 0%,#0e2012 50%,#060f08 100%);}
+.bg-s13{background:radial-gradient(ellipse 50% 50% at 60% 50%,rgba(15,55,40,.6) 0%,transparent 65%),radial-gradient(ellipse 30% 40% at 20% 30%,rgba(150,100,20,.2) 0%,transparent 60%),linear-gradient(135deg,#040d08 0%,#0b1e12 50%,#040c07 100%);}
+.bg-s14{background:radial-gradient(ellipse 60% 70% at 55% 45%,rgba(20,80,45,.5) 0%,transparent 65%),linear-gradient(150deg,#050e07 0%,#0c1f0f 50%,#050d07 100%);}
+.bg-s15{background:linear-gradient(to right,rgba(5,10,6,.9) 0%,rgba(5,10,6,.7) 48%,rgba(8,20,12,.7) 52%,rgba(8,20,12,.9) 100%),linear-gradient(135deg,#040a05 0%,#0a1a0c 100%);}
+.bg-s17{background:radial-gradient(ellipse 60% 60% at 50% 55%,rgba(100,60,10,.35) 0%,transparent 65%),radial-gradient(ellipse 40% 30% at 75% 20%,rgba(150,90,20,.2) 0%,transparent 55%),linear-gradient(140deg,#080a03 0%,#18150a 50%,#0a0b04 100%);}
+.bg-s18{background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(80,50,8,.3) 0%,transparent 65%),linear-gradient(135deg,#080a03 0%,#12140a 50%,#080a04 100%);}
+.bg-s21{background:radial-gradient(ellipse 70% 60% at 50% 45%,rgba(120,80,15,.3) 0%,transparent 65%),radial-gradient(ellipse 50% 80% at 30% 60%,rgba(15,50,25,.5) 0%,transparent 65%),linear-gradient(160deg,#040a05 0%,#0f1e0b 40%,#12190a 70%,#050c06 100%);}
+
+/* ── IMAGE PLACEHOLDERS ── */
+.img-ph{
+  background:rgba(255,255,255,.04);
+  border:1px dashed rgba(201,168,76,.3);
+  border-radius:10px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:6px;overflow:hidden;position:relative;
+  flex-shrink:0;
+}
+.img-ph img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;border-radius:9px;
+  display:none;
+}
+.img-ph.loaded img{display:block;}
+.img-ph.loaded .ph-lbl,.img-ph.loaded .ph-ico{display:none;}
+.ph-ico{font-size:clamp(20px,2.5vw,32px);opacity:.3;}
+.ph-lbl{
+  font-family:'Jost',sans-serif;
+  font-size:clamp(8px,.75vw,10px);font-weight:300;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(201,168,76,.5);text-align:center;
+  padding:0 8px;line-height:1.5;
+}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow{
+  font-family:'Jost',sans-serif;
+  font-size:clamp(9px,.9vw,11px);font-weight:300;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1em;opacity:.9;
+}
+.headline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(32px,5.5vw,80px);font-weight:300;
+  line-height:1;color:var(--white);letter-spacing:-.01em;
+}
+.headline em{font-style:italic;color:var(--gold-light);}
+.headline-sm{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(24px,3.8vw,52px);font-weight:300;
+  line-height:1.05;color:var(--white);
+}
+.headline-sm em{font-style:italic;color:var(--gold-light);}
+.subline{
+  font-family:'Jost',sans-serif;
+  font-size:clamp(12px,1.2vw,16px);font-weight:200;
+  letter-spacing:.06em;color:var(--white-dim);
+  margin-top:1em;line-height:1.7;
+}
+.body-sm{
+  font-family:'Jost',sans-serif;
+  font-size:clamp(11px,1.1vw,14px);font-weight:200;
+  color:var(--white-dim);line-height:1.65;
+}
+.giant{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(64px,12vw,160px);font-weight:300;
+  line-height:.9;color:var(--white);letter-spacing:-.02em;
+}
+.giant em{font-style:italic;color:var(--gold-light);}
+.section-num{
+  font-family:'Jost',sans-serif;font-size:clamp(9px,.9vw,11px);
+  font-weight:200;letter-spacing:.4em;color:var(--gold);
+  opacity:.7;margin-bottom:.6em;text-transform:uppercase;
+}
+
+/* ── DECORATIVE ── */
+.rule{width:40px;height:1px;background:var(--gold);opacity:.5;margin:1.4em 0;}
+.rule-c{width:40px;height:1px;background:var(--gold);opacity:.5;margin:1.4em auto;}
+.pill{
+  display:inline-block;font-family:'Jost',sans-serif;
+  font-size:clamp(8px,.85vw,10px);font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;
+  padding:.4em 1em;border:1px solid rgba(201,168,76,.4);
+  border-radius:30px;color:var(--gold);margin-bottom:1.2em;
+}
+
+/* Glow box — interview quote */
+.glow-box{
+  background:rgba(201,168,76,.06);
+  border-left:2px solid var(--gold);
+  border-radius:0 6px 6px 0;
+  padding:1.2vh 1.4vw;
+  margin:1vh 0;
+}
+.glow-box p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(14px,1.6vw,20px);
+  font-style:italic;color:var(--white);line-height:1.5;
+}
+.glow-box .src{
+  font-family:'Jost',sans-serif;
+  font-size:clamp(8px,.75vw,9px);
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);opacity:.7;margin-top:.5em;
+}
+
+/* Small card */
+.mini-card{
+  background:var(--white-ghost);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:6px;padding:.9vh 1vw;
+  border-top:2px solid var(--gold);
+}
+.mini-card-title{
+  font-family:'Jost',sans-serif;font-size:clamp(8px,.75vw,9px);
+  font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.4em;
+}
+.mini-card-text{
+  font-family:'Jost',sans-serif;font-size:clamp(10px,1vw,13px);
+  font-weight:200;color:var(--white-dim);line-height:1.5;
+}
+
+/* Stat block */
+.stat-block{
+  border-top:1px solid var(--white-ghost);
+  padding-top:1.2vh;text-align:center;
+}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(26px,3vw,42px);font-weight:300;
+  color:var(--gold-light);display:block;line-height:1;
+}
+.stat-lbl{
+  font-family:'Jost',sans-serif;font-size:clamp(8px,.75vw,10px);
+  font-weight:200;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-top:.3em;
+}
+
+/* Token row */
+.token-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.6vh .8vw;
+  background:var(--white-ghost);border-radius:5px;
+  margin-bottom:.4vh;
+}
+.token-row span:first-child{
+  font-family:'Jost',sans-serif;font-size:clamp(11px,1.1vw,14px);
+  font-weight:200;color:var(--white-dim);
+}
+.token-row .tok-num{
+  font-family:'Jost',sans-serif;font-size:clamp(11px,1.1vw,13px);
+  font-weight:400;color:var(--green-pale);
+}
+
+/* Compare item */
+.cmp-item{
+  display:flex;align-items:center;gap:.6em;
+  font-family:'Jost',sans-serif;
+  font-size:clamp(12px,1.2vw,15px);font-weight:300;
+  color:var(--white-dim);margin-bottom:.3vh;line-height:1.2;
+}
+.cmp-item.bright{color:rgba(255,255,255,.8);}
+.cmp-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.cmp-dim{background:rgba(255,255,255,.2);}
+.cmp-bright{background:var(--green-light);}
+
+/* Section tag top-right */
+.sec-tag{
+  position:fixed;top:3vh;right:2.5vw;z-index:1000;
+  font-family:'Jost',sans-serif;font-size:clamp(8px,.8vw,10px);
+  font-weight:300;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold);opacity:0;transition:opacity .5s;
+}
+.sec-tag.show{opacity:.6;}
+
+/* Nav */
+.nav{
+  position:fixed;bottom:3vh;left:50%;transform:translateX(-50%);
+  z-index:1000;display:flex;align-items:center;gap:1vw;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(16px);
+  border:1px solid rgba(201,168,76,.2);
+  padding:.8vh 2vw;border-radius:40px;
+}
+.nav-btn{
+  background:none;border:none;color:var(--gold);
+  font-family:'Jost',sans-serif;font-size:clamp(14px,1.2vw,18px);
+  font-weight:200;cursor:pointer;padding:.2em .5em;transition:color .2s;
+}
+.nav-btn:hover{color:#fff;}
+.nav-counter{
+  font-family:'Jost',sans-serif;font-size:clamp(9px,.8vw,11px);
+  font-weight:200;letter-spacing:.25em;
+  color:rgba(201,168,76,.55);min-width:4.5em;text-align:center;
+}
+.dots{display:flex;gap:.35vw;align-items:center;}
+.dot{
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(201,168,76,.22);cursor:pointer;
+  transition:all .3s;border:none;
+}
+.dot.active{background:var(--gold);width:14px;border-radius:3px;}
+.dot.sec{background:rgba(201,168,76,.38);}
+
+/* Notes */
+.notes-btn{
+  position:fixed;bottom:3vh;right:2.2vw;z-index:1000;
+  background:rgba(0,0,0,.45);backdrop-filter:blur(10px);
+  border:1px solid rgba(201,168,76,.22);color:var(--gold);
+  font-family:'Jost',sans-serif;font-size:clamp(8px,.8vw,10px);
+  font-weight:300;letter-spacing:.2em;text-transform:uppercase;
+  padding:.45em 1.1em;border-radius:20px;cursor:pointer;transition:all .2s;
+}
+.notes-btn:hover{background:rgba(201,168,76,.1);}
+.notes-panel{
+  position:fixed;top:0;left:0;right:0;
+  background:rgba(5,12,8,.96);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(201,168,76,.2);
+  z-index:2000;padding:3.5vh 5vw;max-height:55vh;overflow-y:auto;display:none;
+  /* kruisje is fixed gepositioneerd, geen extra aanpassing nodig */
+}
+.notes-panel.open{display:block;}
+.notes-close{
+  position:fixed;top:2.5vh;right:2.5vw;
+  background:none;border:none;
+  color:rgba(255,255,255,.5);font-size:clamp(18px,1.6vw,24px);
+  cursor:pointer;line-height:1;transition:color .2s;z-index:2001;
+}
+.notes-close:hover{color:var(--gold);}
+.notes-panel h4{font-family:'Jost',sans-serif;font-size:9px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2em;opacity:.8;}
+.notes-panel p,.notes-panel li{font-family:'Jost',sans-serif;font-size:clamp(12px,1.1vw,14px);font-weight:200;color:rgba(255,255,255,.7);line-height:1.8;margin-bottom:.3em;}
+.notes-panel ul{padding-left:1.4em;}
+.notes-panel strong{font-weight:400;color:rgba(255,255,255,.9);}
+
+/* Particles */
+.particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.particle{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;opacity:0;animation:float-up 6s ease-in infinite;}
+@keyframes float-up{0%{opacity:0;transform:translateY(0) scale(1);}20%{opacity:.4;}80%{opacity:.2;}100%{opacity:0;transform:translateY(-40vh) scale(0);}}
+
+/* ══════════════════════════════════════════
+   SLIDE LAYOUTS
+══════════════════════════════════════════ */
+
+/* Full-slide content wrapper (non-opener slides) */
+.sl{
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  padding:5vh 4vw 7vh;
+  display:flex;flex-direction:column;
+}
+
+/* Standard title block at top */
+.title-block{margin-bottom:1.5vh;flex-shrink:0;}
+
+/* Two-column main body */
+.two-col{display:flex;gap:2.5vw;flex:1;min-height:0;}
+.col{display:flex;flex-direction:column;gap:1.2vh;min-height:0;}
+.col-text{flex:1;justify-content:center;}
+.col-img{flex:1;justify-content:center;}
+.col-img-wide{flex:1.3;justify-content:center;}
+.col-text-wide{flex:1.3;justify-content:center;}
+
+/* Three-column */
+.three-col{display:flex;gap:2vw;flex:1;min-height:0;}
+.col-third{flex:1;display:flex;flex-direction:column;gap:.8vh;min-height:0;}
+
+/* Opener slides (section dividers — fullscreen dark) */
+.opener{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+}
+
+/* Leaf watermark */
+.leaf-bg{
+  position:absolute;right:3%;top:8%;
+  width:28%;height:84%;opacity:.05;
+  pointer-events:none;z-index:0;
+}
+
+/* Section opener background glow circle */
+.opener-glow{
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+}
+
+/* ──────────────────────────────────────
+   SLIDE 1 — TITEL
+────────────────────────────────────── */
+#s1 .s1-img{position:absolute;inset:0;}
+#s1 .s1-img .img-ph{position:absolute;inset:0;border-radius:0;border:none;background:rgba(20,50,25,.8);}
+#s1 .s1-img .img-ph .ph-ico{font-size:60px;}
+#s1 .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,.25) 55%,rgba(0,0,0,.05) 100%);}
+#s1 .s1-content{position:absolute;bottom:11vh;left:7vw;max-width:58vw;z-index:2;}
+#s1 .s1-top{position:absolute;top:2.8vh;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:0 3.5vw;z-index:2;}
+#s1 .s1-top .eyebrow{margin:0;opacity:.7;}
+#s1 .logo-block{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:5px 12px 5px 8px;}
+#s1 .logo-block .logo-dot{width:22px;height:22px;background:linear-gradient(135deg,var(--green),var(--green-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;}
+#s1 .logo-block .logo-txt{font-family:'Jost',sans-serif;font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8);line-height:1.3;}
+#s1 .particles{z-index:1;}
+
+/* ──────────────────────────────────────
+   SLIDE 2 — SCENARIO
+────────────────────────────────────── */
+#s2 .matrix-grid{
+  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+  gap:3px;border:1px solid rgba(201,168,76,.25);border-radius:6px;
+  overflow:hidden;width:100%;flex:1;min-height:0;
+}
+#s2 .m-cell{
+  background:rgba(255,255,255,.04);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:.8em;text-align:center;gap:.3em;
+  font-family:'Jost',sans-serif;font-size:clamp(10px,.9vw,12px);
+  font-weight:300;color:rgba(255,255,255,.35);line-height:1.3;
+}
+#s2 .m-cell.hi{background:rgba(45,106,66,.3);color:rgba(255,255,255,.9);font-weight:400;border:1px solid rgba(82,160,110,.35);position:relative;}
+#s2 .m-cell.hi::after{content:'★';position:absolute;top:4px;right:7px;font-size:9px;color:var(--gold);}
+#s2 .m-cell .ci{font-size:clamp(14px,1.4vw,18px);}
+
+/* ──────────────────────────────────────
+   SLIDE 5 — TWEE ROUTES
+────────────────────────────────────── */
+#s6 .route-split{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  display:flex;
+}
+#s6 .rh{
+  flex:1;display:flex;flex-direction:column;
+  padding:5.5vh 3.5vw 8vh;
+  position:relative;
+}
+#s6 .rh.left{border-right:1px solid rgba(255,255,255,.08);}
+#s6 .rt{
+  display:inline-block;font-family:'Jost',sans-serif;
+  font-size:clamp(10px,1vw,13px);font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  padding:.45em 1.1em;border-radius:20px;border:1px solid;margin-bottom:1vh;width:fit-content;
+}
+#s6 .rt-green{border-color:var(--green-light);color:var(--green-pale);}
+#s6 .rt-gold{border-color:var(--gold);color:var(--gold-light);}
+#s6 .imgs{display:flex;gap:1.2vw;flex:1;min-height:0;margin-top:1.5vh;}
+
+/* ──────────────────────────────────────
+   SLIDE 6 — AI PLANTENZORG (6-foto grid)
+────────────────────────────────────── */
+#s7 .photo-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  grid-template-rows:1fr 1fr;gap:1vw;
+  flex:1;min-height:0;
+}
+
+/* ──────────────────────────────────────
+   SLIDE 8 — IMMERSIVE ROUTE
+────────────────────────────────────── */
+#s10 .img-top{flex:1.3;min-height:0;}
+#s10 .bottom-row{display:flex;gap:2vw;flex:.9;min-height:0;}
+#s10 .b-col{flex:1;display:flex;flex-direction:column;gap:.7vh;min-height:0;}
+#s10 .b-col-text{flex:1;display:flex;flex-direction:column;justify-content:center;gap:.8vh;}
+
+/* ──────────────────────────────────────
+   SLIDE 12 — VERGELIJKING
+────────────────────────────────────── */
+#s15 .compare-wrap{display:flex;gap:2.5vw;flex:1;min-height:0;}
+#s15 .cc{flex:1;display:flex;flex-direction:column;gap:.6vh;min-height:0;}
+#s15 .cc-head{
+  font-family:'Jost',sans-serif;font-size:clamp(10px,1vw,13px);font-weight:500;
+  letter-spacing:.15em;text-transform:uppercase;padding:.6em 1em;border-radius:5px;flex-shrink:0;
+}
+#s15 .cc-old .cc-head{background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);}
+#s15 .cc-new .cc-head{background:rgba(82,160,110,.12);color:var(--green-pale);}
+#s15 .cc-bottom{flex:1;display:flex;flex-direction:column;gap:.5vh;justify-content:flex-start;padding-top:.4vh;}
+#s15 .cc-img{height:28%;flex-shrink:0;margin-bottom:.4vh;}
+#s15 .cc-note{
+  flex-shrink:0;margin-top:.8vh;
+  font-family:'Jost',sans-serif;font-size:clamp(11px,1.05vw,13px);
+  font-weight:200;color:rgba(255,255,255,.5);
+  border-top:1px solid var(--white-ghost);padding-top:.6vh;text-align:center;
+  font-style:italic;
+}
+/* side text column */
+#s15 .cc-side{flex:.85;display:flex;flex-direction:column;justify-content:center;gap:1.4vh;}
+
+/* ──────────────────────────────────────
+   SLIDE 13 — ROBOTS OPENER FIX
+   (text centered, not at top)
+────────────────────────────────────── */
+#s17 .opener{justify-content:center;padding:0;}
+
+/* ──────────────────────────────────────
+   SLIDE 14 — ROBOTS IN ROUTES FIX
+────────────────────────────────────── */
+#s18 .sl{padding-top:5vh;}
+#s18 .title-block{flex-shrink:0;margin-bottom:1vh;}
+#s18 .hl-bar{
+  flex-shrink:0;margin-bottom:1.2vh;
+  background:rgba(201,168,76,.08);
+  border:1px solid rgba(201,168,76,.2);
+  border-radius:6px;padding:.6vh 1.2vw;
+}
+#s18 .hl-bar p{
+  font-family:'Jost',sans-serif;font-size:clamp(10px,.95vw,13px);
+  font-weight:300;color:var(--gold-light);text-align:center;line-height:1.5;
+}
+#s18 .three-photo{display:flex;gap:2vw;flex:1;min-height:0;}
+#s18 .ph-col{flex:1;display:flex;flex-direction:column;gap:.7vh;min-height:0;}
+#s18 .ph-col .img-ph{flex:1;min-height:0;}
+#s18 .cap{
+  font-family:'Jost',sans-serif;font-size:clamp(10px,.95vw,13px);
+  font-weight:200;color:var(--white-dim);line-height:1.4;flex-shrink:0;
+}
+#s18 .cap strong{color:var(--white);font-weight:400;}
+
+/* ──────────────────────────────────────
+   SLIDE 15 — AFSLUITING
+────────────────────────────────────── */
+#s21 .s15-img{position:absolute;inset:0;}
+#s21 .s15-img .img-ph{position:absolute;inset:0;border-radius:0;border:none;background:rgba(10,25,15,.8);}
+#s21 .s15-img .img-ph .ph-ico{font-size:60px;}
+#s21 .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.35) 55%,rgba(0,0,0,.08) 100%);}
+#s21 .s15-content{position:absolute;bottom:auto;top:50%;transform:translate(-50%,-50%);left:50%;text-align:center;width:82%;z-index:2;}
+#s21 .icon-row{display:flex;justify-content:center;gap:3vw;margin-top:2.5vh;flex-wrap:wrap;}
+#s21 .icon-block{text-align:center;}
+#s21 .icon-char{font-size:clamp(18px,2.2vw,28px);display:block;margin-bottom:.4em;}
+#s21 .icon-word{font-family:'Jost',sans-serif;font-size:clamp(8px,.75vw,10px);font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.65;}
+#s21 .s15-top{position:absolute;top:2.8vh;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:0 3.5vw;z-index:2;}
+#s21 .s15-top .eyebrow{margin:0;opacity:.6;}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<button class="notes-btn" onclick="toggleNotes()">📋 Notities — N</button>
+<div class="sec-tag" id="sec-tag"></div>
+
+<div class="notes-panel" id="notes-panel">
+  <button class="notes-close" onclick="toggleNotes()" title="Sluiten">✕</button>
+  <h4>Notities & bronnen — slide <span id="notes-num">1</span></h4>
+  <div id="notes-body"></div>
+</div>
+
+<div class="deck">
+
+<!-- ══════ S1 TITEL ══════ -->
+<div class="slide bg-s1" id="s1">
+  <div class="s1-img">
+    <div class="img-ph" id="img-s1-a">
+      <span class="ph-ico">🌿</span>
+      <span class="ph-lbl">FOTO A · Tuincentrum interieur avondlicht · 16:9</span>
+      <img src="" alt="">
+    </div>
+  </div>
+  <div class="overlay"></div>
+  <div class="particles" id="p1"></div>
+  <div class="s1-top">
+    <span class="eyebrow">KV9 · New Digital Technologies · 2030</span>
+    <div class="logo-block">
+      <div class="logo-dot">🌱</div>
+      <div class="logo-txt">Tuinbranche<br>Nederland</div>
+    </div>
+  </div>
+  <div class="s1-content">
+    <div class="eyebrow">Toekomstscenario</div>
+    <h1 class="headline">De Groene<br><em>Batterij</em></h1>
+    <p class="subline">Technologie als decor. Mens als hoofdrol.</p>
+    <div style="margin-top:2.5vh;display:flex;flex-direction:column;gap:.35em;">
+      <p style="font-family:'Jost',sans-serif;font-size:clamp(10px,1vw,13px);font-weight:200;letter-spacing:.08em;color:rgba(255,255,255,.55);">Marlon de Wit &nbsp;·&nbsp; 500963567</p>
+      <p style="font-family:'Jost',sans-serif;font-size:clamp(10px,1vw,13px);font-weight:200;letter-spacing:.08em;color:rgba(255,255,255,.55);">Tijn Kaars &nbsp;·&nbsp; 500934515</p>
+      <p style="font-family:'Jost',sans-serif;font-size:clamp(10px,1vw,13px);font-weight:200;letter-spacing:.08em;color:rgba(255,255,255,.55);">Quinty IJssel de Schepper &nbsp;·&nbsp; 500912755</p>
+      <p style="font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,.5);margin-top:.4em;">KV9 – New Digital Technologies</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S2 SCENARIO ══════ -->
+<div class="slide bg-s2" id="s2">
+  <svg class="leaf-bg" viewBox="0 0 200 300" fill="none"><path d="M100 280 Q60 200 40 140 Q20 80 80 20 Q140 80 160 140 Q180 200 100 280Z" fill="#2d6a42"/><line x1="100" y1="20" x2="100" y2="280" stroke="#1a3d26" stroke-width="1.5"/></svg>
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">Toekomstscenario</div>
+      <h2 class="headline">Waarom De Groene <em>Batterij?</em></h2>
+    </div>
+    <div class="two-col">
+      <!-- LEFT: tekst + foto -->
+      <div class="col col-text" style="gap:1.2vh;">
+        <div class="pill">Scenario 3 van 4</div>
+        <p class="body-sm">De fysieke winkel blijft het hart. Technologie werkt op de achtergrond. De mens staat altijd centraal.</p>
+        <p class="body-sm">Het tuincentrum wordt energie-onafhankelijk via zonnepanelen en batterijopslag — een lokale energiehub voor de buurt.</p>
+        <div class="img-ph" id="img-s2-a" style="flex:1;min-height:0;">
+          <span class="ph-ico">🏡</span><span class="ph-lbl">FOTO A · Luchtfoto tuincentrum zonnepanelendak · 16:9</span><img src="" alt="">
+        </div>
+      </div>
+      <!-- RIGHT: één matrix met assen -->
+      <div class="col col-img" style="gap:.6vh;">
+        <p class="body-sm" style="flex-shrink:0;"><strong style="color:rgba(255,255,255,.8);">Scenariomatrix</strong> — twee kernonzekerheden</p>
+        <!-- Matrix wrapper: verticale as links, matrix rechts -->
+        <div style="display:flex;flex:1;min-height:0;gap:.6vw;">
+          <!-- Verticale as met icoon -->
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;width:1.6vw;gap:.5em;">
+            <span style="font-size:clamp(12px,1.3vw,18px);">☀️</span>
+            <span style="font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);color:rgba(255,255,255,.45);letter-spacing:.12em;writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;">↑ Energie-autonoom</span>
+            <span style="font-size:clamp(12px,1.3vw,18px);">🔋</span>
+          </div>
+          <!-- Matrix + horizontale as -->
+          <div style="display:flex;flex-direction:column;flex:1;min-height:0;gap:.3vh;">
+            <!-- De 4-kwadrantenmatrix -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;flex:1;min-height:0;border:1px solid rgba(201,168,76,.2);border-radius:6px;overflow:hidden;">
+              <!-- Linksboven: Groen via de Cloud -->
+              <div style="background:rgba(255,255,255,.04);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.8em;text-align:center;gap:.3em;font-family:'Jost',sans-serif;font-size:clamp(10px,1vw,13px);font-weight:300;color:rgba(255,255,255,.4);line-height:1.3;">
+                <span style="font-size:clamp(14px,1.4vw,20px);">☁️</span>Groen via<br>de Cloud
+              </div>
+              <!-- Rechtsboven: De Groene Batterij (highlighted) -->
+              <div style="background:rgba(45,106,66,.28);border:1px solid rgba(82,160,110,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.8em;text-align:center;gap:.25em;font-family:'Jost',sans-serif;font-size:clamp(11px,1.05vw,14px);font-weight:500;color:rgba(255,255,255,.95);line-height:1.3;position:relative;">
+                <span style="font-size:clamp(14px,1.4vw,20px);">🔋</span>
+                <strong>De Groene Batterij</strong>
+                <span style="font-family:'Jost',sans-serif;font-size:clamp(8px,.78vw,10px);font-weight:400;letter-spacing:.08em;color:var(--gold);">★ Ons favoriete scenario</span>
+              </div>
+              <!-- Linksonder: Digital Eden -->
+              <div style="background:rgba(255,255,255,.04);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.8em;text-align:center;gap:.3em;font-family:'Jost',sans-serif;font-size:clamp(10px,1vw,13px);font-weight:300;color:rgba(255,255,255,.4);line-height:1.3;">
+                <span style="font-size:clamp(14px,1.4vw,20px);">🏡</span>Digital<br>Eden
+              </div>
+              <!-- Rechtsonder: Traditionele Kas -->
+              <div style="background:rgba(255,255,255,.04);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.8em;text-align:center;gap:.3em;font-family:'Jost',sans-serif;font-size:clamp(10px,1vw,13px);font-weight:300;color:rgba(255,255,255,.4);line-height:1.3;">
+                <span style="font-size:clamp(14px,1.4vw,20px);">🌿</span>Traditionele<br>Kas
+              </div>
+            </div>
+            <!-- Horizontale as onderaan met iconen -->
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-shrink:0;padding:0 .2vw;">
+              <div style="display:flex;align-items:center;gap:.4em;">
+                <span style="font-size:clamp(11px,1.1vw,16px);">📋</span>
+                <span style="font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);color:rgba(255,255,255,.4);letter-spacing:.1em;">← Laag digitaal</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:.4em;">
+                <span style="font-family:'Jost',sans-serif;font-size:clamp(9px,.85vw,11px);color:rgba(255,255,255,.4);letter-spacing:.1em;">Hoog digitaal →</span>
+                <span style="font-size:clamp(11px,1.1vw,16px);">💻</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S3 MEDEWERKER ══════ -->
+<div class="slide bg-s3" id="s3">
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">Veldonderzoek · Primaire bron 2025</div>
+      <h2 class="headline-sm">De stem van de <em>medewerker</em></h2>
+    </div>
+    <div class="two-col">
+      <div class="col col-text-wide" style="gap:1vh;">
+        <div class="glow-box">
+          <p style="font-size:clamp(16px,1.9vw,24px);">"Ze komen niet voor een plant. Ze komen voor het <em>gevoel</em>. Voor het contact."</p>
+          <div class="src">Medewerker tuincentrum · Veldinterview 2025</div>
+        </div>
+        <p class="body-sm">De interviews zijn gebruikt als input voor ons idee en ons advies aan het tuincentrum.</p>
+        <div style="display:flex;gap:1vw;flex-shrink:0;">
+          <div class="mini-card" style="flex:1;">
+            <div class="mini-card-title" style="font-size:clamp(9px,.85vw,11px);">💬 Contact</div>
+            <div class="mini-card-text" style="font-size:clamp(12px,1.15vw,15px);">Menselijk contact is het onderscheidend vermogen</div>
+          </div>
+          <div class="mini-card" style="flex:1;">
+            <div class="mini-card-title" style="font-size:clamp(9px,.85vw,11px);">⏱ Tijd</div>
+            <div class="mini-card-text" style="font-size:clamp(12px,1.15vw,15px);">Watergeven kost dagelijks uren — kostbare klantcontacttijd</div>
+          </div>
+          <div class="mini-card" style="flex:1;">
+            <div class="mini-card-title" style="font-size:clamp(9px,.85vw,11px);">✓ Open voor AI</div>
+            <div class="mini-card-text" style="font-size:clamp(12px,1.15vw,15px);">Technologie die helpt — nooit die vervangt</div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-img" style="gap:1.2vh;">
+        <div class="img-ph" id="img-s3-a" style="flex:1.4;min-height:0;">
+          <span class="ph-ico">🤝</span><span class="ph-lbl">FOTO A · Medewerker in gesprek met klant · 16:9</span><img src="" alt="">
+        </div>
+        <div class="img-ph" id="img-s3-b" style="flex:1;min-height:0;">
+          <span class="ph-ico">🌱</span><span class="ph-lbl">FOTO B · Medewerker legt plant uit · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S4 SCENARIO ENERGIEHUB ══════ -->
+<div class="slide bg-s3" id="s4">
+  <svg class="leaf-bg" viewBox="0 0 200 300" fill="none"><path d="M100 280 Q60 200 40 140 Q20 80 80 20 Q140 80 160 140 Q180 200 100 280Z" fill="#2d6a42"/><line x1="100" y1="20" x2="100" y2="280" stroke="#1a3d26" stroke-width="1.5"/></svg>
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">Scenario · Businessmodel 2030</div>
+      <h2 class="headline-sm">Van tuincentrum naar <em>energiehub.</em></h2>
+    </div>
+    <div class="two-col">
+      <div class="col col-text" style="gap:1vh;">
+        <p class="body-sm">In De Groene Batterij wordt het tuincentrum energie-onafhankelijk via zonnepanelen op het dak en grootschalige batterijopslag. Overtollige energie wordt geleverd aan de buurt — het tuincentrum wordt een lokale energiehub.</p>
+        <div class="glow-box">
+          <p style="font-size:clamp(16px,1.9vw,24px);">Het tuincentrum verkoopt geen stroom — het <em>deelt</em> overschot met de buurt.</p>
+        </div>
+        <div style="display:flex;gap:1.5vw;flex-shrink:0;margin-top:.5vh;">
+          <div class="stat-block" style="flex:1;"><span class="stat-num">100%</span><div class="stat-lbl">Eigen energie</div></div>
+          <div class="stat-block" style="flex:1;"><span class="stat-num">↓ CO₂</span><div class="stat-lbl">Uitstoot</div></div>
+          <div class="stat-block" style="flex:1;"><span class="stat-num">↑ band</span><div class="stat-lbl">Met buurt</div></div>
+        </div>
+        <p class="body-sm">Dit maakt het tuincentrum minder afhankelijk van stijgende energieprijzen én versterkt de binding met de lokale gemeenschap — een concurrentievoordeel dat geen webshop kan kopiëren.</p>
+      </div>
+      <div class="col col-img" style="gap:1.2vh;">
+        <div class="img-ph" id="img-s4-a" style="flex:1.3;min-height:0;">
+          <span class="ph-ico">☀️</span><span class="ph-lbl">FOTO A · Luchtfoto tuincentrum met zonnepanelendak · 16:9</span><img src="" alt="">
+        </div>
+        <div class="img-ph" id="img-s4-b" style="flex:1;min-height:0;">
+          <span class="ph-ico">🔋</span><span class="ph-lbl">FOTO B · Batterijopslag installatie · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S5 AI OPENER ══════ -->
+<div class="slide bg-s5" id="s5">
+  <div class="opener-glow" style="width:500px;height:500px;background:rgba(10,40,80,.4);top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;"></div>
+  <div class="img-ph" id="img-s5-a" style="position:absolute;inset:0;border:none;border-radius:0;background:transparent;">
+    <span class="ph-ico">🔬</span><span class="ph-lbl">FOTO A · Futuristische kas met IoT-datastromen · 16:9</span><img src="" alt="">
+  </div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(2,8,16,.6),rgba(7,21,37,.5));"></div>
+  <div class="opener" style="z-index:2;">
+    <div class="section-num">01 / 04</div>
+    <div class="giant"><em>AI</em></div>
+    <div class="rule-c"></div>
+    <p class="subline" style="max-width:500px;margin:0 auto;font-size:clamp(14px,1.5vw,20px);font-weight:400;">Onzichtbaar aanwezig — zodat de medewerker zichtbaar kan zijn.</p>
+  </div>
+</div>
+
+<!-- ══════ S6 TWEE ROUTES ══════ -->
+<div class="slide bg-s6" id="s6">
+  <div class="route-split">
+    <div class="rh left">
+      <div class="rt rt-green">Route A</div>
+      <h2 class="headline-sm">De <em>Beleving</em></h2>
+      <p class="subline" style="margin-top:.6em;font-size:clamp(13px,1.35vw,18px);font-weight:300;">Loop de hele winkel door. Ontdek immersive zones, laat je begeleiden door een medewerker.</p>
+      <p class="body-sm" style="margin-top:.8vh;font-size:clamp(12px,1.2vw,15px);font-weight:300;">AI personaliseert je route: verhaallabels bij planten, sfeerverlichting per zone, plantadvies op maat.</p>
+      <div class="imgs">
+        <div class="img-ph" id="img-s6-a" style="flex:1;min-height:0;">
+          <span class="ph-ico">🚪</span><span class="ph-lbl">FOTO A · Ingang twee routes · 16:9</span><img src="" alt="">
+        </div>
+        <div class="img-ph" id="img-s6-b" style="flex:1;min-height:0;">
+          <span class="ph-ico">🌿</span><span class="ph-lbl">FOTO B · Stel in plantengang · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+    </div>
+    <div style="width:1px;background:rgba(255,255,255,.08);margin:6vh 0 8vh;flex-shrink:0;"></div>
+    <div class="rh">
+      <div class="rt rt-gold">Route B</div>
+      <h2 class="headline-sm">Click &amp; <em>Collect</em></h2>
+      <p class="subline" style="margin-top:.6em;font-size:clamp(13px,1.35vw,18px);font-weight:300;">Weet wat je wil. Kom, pak, ga. Binnen 5–10 minuten de deur uit.</p>
+      <p class="body-sm" style="margin-top:.8vh;font-size:clamp(12px,1.2vw,15px);font-weight:300;">Robot bereidt de bestelling voor. Medewerker begeleidt de klant bij de balie.</p>
+      <div class="imgs">
+        <div class="img-ph" id="img-s6-c" style="flex:1;min-height:0;">
+          <span class="ph-ico">📦</span><span class="ph-lbl">FOTO C · Man ontvangt bestelling bij balie · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Center label -->
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:5;">
+    <div style="width:1px;height:6vh;background:linear-gradient(to bottom,transparent,rgba(201,168,76,.35),transparent);margin:0 auto .6em;"></div>
+    <div class="eyebrow" style="margin:0;">Jouw keuze</div>
+    <div style="width:1px;height:6vh;background:linear-gradient(to bottom,transparent,rgba(201,168,76,.35),transparent);margin:.6em auto 0;"></div>
+  </div>
+</div>
+
+<!-- ══════ S7 AI PLANTENZORG ══════ -->
+<div class="slide bg-s7" id="s7">
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">AI · Operationeel</div>
+      <h2 class="headline-sm">De plant vertelt wat hij <em>nodig heeft.</em></h2>
+    </div>
+    <div class="two-col">
+      <div class="col col-text" style="gap:1vh;">
+        <p class="body-sm">IoT-sensoren meten per plant de vochtigheid, temperatuur en voedingsstatus. AI detecteert ziekte eerder dan het menselijk oog en stuurt automatisch irrigatie aan.</p>
+        <div class="glow-box">
+          <p style="font-size:clamp(16px,1.9vw,24px);">"Het watergeven kost ons elke dag uren."</p>
+          <div class="src">Medewerker · Veldinterview 2025</div>
+        </div>
+        <div style="display:flex;gap:1.5vw;flex-shrink:0;margin-top:.5vh;">
+          <div class="stat-block" style="flex:1;"><span class="stat-num">25%</span><div class="stat-lbl">Minder pesticiden & water</div></div>
+          <div class="stat-block" style="flex:1;"><span class="stat-num">24/7</span><div class="stat-lbl">Monitoring</div></div>
+          <div class="stat-block" style="flex:1;"><span class="stat-num">↑ tijd</span><div class="stat-lbl">Voor de klant</div></div>
+        </div>
+      </div>
+      <div class="col col-img-wide">
+        <div class="photo-grid">
+          <div class="img-ph" id="img-s7-a"><span class="ph-ico">🔵</span><span class="ph-lbl">FOTO A · IoT-sensoren in aarde</span><img src="" alt=""></div>
+          <div class="img-ph" id="img-s7-b"><span class="ph-ico">🟢</span><span class="ph-lbl">FOTO B · Sensor-bol</span><img src="" alt=""></div>
+          <div class="img-ph" id="img-s7-c"><span class="ph-ico">📡</span><span class="ph-lbl">FOTO C · Cilindrische sensor</span><img src="" alt=""></div>
+          <div class="img-ph" id="img-s7-d"><span class="ph-ico">📱</span><span class="ph-lbl">FOTO D · Medewerker tablet</span><img src="" alt=""></div>
+          <div class="img-ph" id="img-s7-e"><span class="ph-ico">🏭</span><span class="ph-lbl">FOTO E · Kas overzicht</span><img src="" alt=""></div>
+          <div class="img-ph" id="img-s7-f"><span class="ph-ico">🤖</span><span class="ph-lbl">FOTO F · Irrigatierobot avond</span><img src="" alt=""></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S8 AI PLANTENASSISTENT ══════ -->
+<div class="slide bg-s6" id="s8">
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">AI · In de winkel</div>
+      <h2 class="headline-sm">De winkel die <em>met je meedenkt.</em></h2>
+    </div>
+    <div class="two-col">
+      <div class="col col-text" style="gap:1vh;">
+        <p class="body-sm">Elk plant in het tuincentrum heeft een interactief AI-label. Scan het label met je telefoon of de winkel-tablet en je krijgt direct gepersonaliseerd advies: waterbehoefte, bloeiperiode, combinaties en verzorgingstips.</p>
+        <div class="glow-box">
+          <p style="font-size:clamp(16px,1.9vw,24px);">"Je hoeft niets te weten. <em>De winkel weet het voor je.</em>"</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.5vh;margin-top:.3vh;">
+          <div class="mini-card">
+            <div class="mini-card-title">🏷️ AI-labels bij planten</div>
+            <div class="mini-card-text">Scan voor direct advies over water, licht en verzorging</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-title">📱 Tablet-gids</div>
+            <div class="mini-card-text">Navigeer door de winkel, ontvang advies op basis van jouw tuin en aankoophistorie</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-title">🤝 Medewerker + AI</div>
+            <div class="mini-card-text">AI neemt routinevragen over — medewerker focust op bijzondere gevallen en contact</div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-img" style="gap:1.2vh;">
+        <div class="img-ph" id="img-s8-a" style="flex:1.3;min-height:0;">
+          <span class="ph-ico">📱</span><span class="ph-lbl">FOTO A · Klant scant AI-label bij plant met tablet · 4:3</span><img src="" alt="">
+        </div>
+        <div class="img-ph" id="img-s8-b" style="flex:1;min-height:0;">
+          <span class="ph-ico">💡</span><span class="ph-lbl">FOTO B · Gepersonaliseerd advies op tablet-scherm · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S9 AR/VR OPENER ══════ -->
+<div class="slide bg-s9" id="s9">
+  <div class="opener-glow" style="width:480px;height:480px;background:rgba(30,10,60,.4);top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;"></div>
+  <div class="img-ph" id="img-s9-a" style="position:absolute;inset:0;border:none;border-radius:0;background:transparent;">
+    <span class="ph-ico">🌴</span><span class="ph-lbl">FOTO A · Magische corridor hangende planten · 16:9</span><img src="" alt="">
+  </div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,5,30,.65),rgba(6,11,7,.5));"></div>
+  <div class="opener" style="z-index:2;">
+    <div class="section-num">02 / 04</div>
+    <div class="giant" style="color:#c07aff;">AR <span style="font-size:.6em;opacity:.7;">/</span> VR</div>
+    <div class="rule-c"></div>
+    <p class="subline" style="max-width:500px;margin:0 auto;">Zie je tuin groeien — nog vóór je één plant koopt.</p>
+  </div>
+</div>
+
+<!-- ══════ S10 IMMERSIVE ROUTE ══════ -->
+<div class="slide bg-s10" id="s10">
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">AR/VR · Route A</div>
+      <h2 class="headline-sm">De winkel als <em>beleving</em></h2>
+    </div>
+    <div class="img-top">
+      <div class="img-ph" id="img-s10-a" style="height:100%;">
+        <span class="ph-ico">🌅</span><span class="ph-lbl">FOTO A · Panorama: overgang Nederlandse zone → Tropische zone · 16:9</span><img src="" alt="">
+      </div>
+    </div>
+    <div class="bottom-row">
+      <div class="b-col">
+        <div class="img-ph" id="img-s10-b" style="flex:1;min-height:0;">
+          <span class="ph-ico">🧘</span><span class="ph-lbl">FOTO B · Vrouw op bankje in tropische zone · 4:3</span><img src="" alt="">
+        </div>
+        <p class="body-sm" style="flex-shrink:0;font-size:clamp(12px,1.2vw,15px);font-weight:300;"><strong style="color:rgba(255,255,255,.8);">Rust &amp; beleving.</strong> Stiltehoek bewust leeg — tuinieren is ook een hobby.</p>
+      </div>
+      <div class="b-col">
+        <div class="img-ph" id="img-s10-c" style="flex:1;min-height:0;">
+          <span class="ph-ico">📲</span><span class="ph-lbl">FOTO C · Man bij interactieve kiosk · 4:3</span><img src="" alt="">
+        </div>
+        <p class="body-sm" style="flex-shrink:0;font-size:clamp(12px,1.2vw,15px);font-weight:300;"><strong style="color:rgba(255,255,255,.8);">Opt-in.</strong> Kiosk geeft extra info — klant loopt er ook gewoon langs.</p>
+      </div>
+      <div class="b-col-text">
+        <div class="glow-box">
+          <p>Licht, geur, geluid en temperatuur vertellen het verhaal. Technologie maakt de overgang — de klant voelt het gewoon.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S11 AR VISUALISATIE ══════ -->
+<div class="slide bg-s11" id="s11">
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">AR/VR · Thuis &amp; in de winkel</div>
+      <h2 class="headline-sm">Zie het eerst. <em>Koop daarna.</em></h2>
+    </div>
+    <div class="two-col">
+      <div class="col col-text" style="gap:1vh;">
+        <p class="body-sm">Met AR op de smartphone scant de klant zijn tuin. Direct verschijnt een realistische digitale plant in de echte ruimte — per seizoen, op schaal, in de echte context.</p>
+        <p class="body-sm">In de winkel is een VR-headset beschikbaar. Samen met een medewerker ontwerp je je droomtuin — en wat je kiest gaat direct in het winkelmandje.</p>
+        <div style="display:flex;gap:1.5vw;flex-shrink:0;">
+          <div class="stat-block" style="flex:1;"><span class="stat-num">+40%</span><div class="stat-lbl">Hogere conversie</div></div>
+          <div class="stat-block" style="flex:1;"><span class="stat-num">−40%</span><div class="stat-lbl">Minder retour</div></div>
+          <div class="stat-block" style="flex:1;"><span class="stat-num">0</span><div class="stat-lbl">App nodig (WebAR)</div></div>
+        </div>
+      </div>
+      <div class="col col-img" style="gap:1.2vh;">
+        <div class="img-ph" id="img-s11-a" style="flex:1;min-height:0;">
+          <span class="ph-ico">📱</span><span class="ph-lbl">FOTO A · Man houdt telefoon op in tuin, AR-plant zichtbaar · 4:3</span><img src="" alt="">
+        </div>
+        <div class="img-ph" id="img-s11-b" style="flex:1;min-height:0;">
+          <span class="ph-ico">🥽</span><span class="ph-lbl">FOTO B · Vrouw met VR-headset ontwerpt tuin in winkel · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S12 AR GAMIFICATION ══════ -->
+<div class="slide bg-s7" id="s12">
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">AR/VR · Experimenteerzone</div>
+      <h2 class="headline-sm">Ontwerp je eigen tuin — <em>zonder risico.</em></h2>
+    </div>
+    <div class="two-col">
+      <div class="col col-text" style="gap:1vh;">
+        <p class="body-sm">In de interactieve VR-zone van het tuincentrum stapt de klant met een headset in een digitale 3D-versie van zijn eigen tuin. Planten verplaatsen, kleuren aanpassen, combinaties testen — alles zonder een euro uit te geven.</p>
+        <div class="glow-box">
+          <p style="font-size:clamp(16px,1.9vw,24px);">Tuinieren wordt <em>speels, leerzaam</em> en inspirerend.</p>
+        </div>
+        <div style="display:flex;gap:1.5vw;flex-shrink:0;margin-top:.5vh;">
+          <div class="stat-block" style="flex:1;"><span class="stat-num">0</span><div class="stat-lbl">Risico</div></div>
+          <div class="stat-block" style="flex:1;"><span class="stat-num">∞</span><div class="stat-lbl">Combinaties</div></div>
+          <div class="stat-block" style="flex:1;"><span class="stat-num">+40%</span><div class="stat-lbl">Conversie</div></div>
+        </div>
+        <p class="body-sm">Groei-simulaties laten zien hoe planten zich ontwikkelen door de seizoenen. Virtuele vlinders en bijen verlevendigen de tuin. De klant maakt keuzes met vertrouwen.</p>
+      </div>
+      <div class="col col-img" style="gap:1.2vh;">
+        <div class="img-ph" id="img-s12-a" style="flex:1.3;min-height:0;">
+          <span class="ph-ico">🥽</span><span class="ph-lbl">FOTO A · Klant met VR-headset ontwerpt tuin · 16:9</span><img src="" alt="">
+        </div>
+        <div class="img-ph" id="img-s12-b" style="flex:1;min-height:0;">
+          <span class="ph-ico">🌸</span><span class="ph-lbl">FOTO B · Virtuele tuin met seizoenswisseling · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S13 WEB3 OPENER ══════ -->
+<div class="slide bg-s13" id="s13">
+  <div class="opener-glow" style="width:480px;height:480px;background:rgba(15,55,40,.35);top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;"></div>
+  <div class="img-ph" id="img-s13-a" style="position:absolute;inset:0;border:none;border-radius:0;background:transparent;">
+    <span class="ph-ico">⛓️</span><span class="ph-lbl">FOTO A · Plant met gouden blockchain-netwerklijnen · 16:9</span><img src="" alt="">
+  </div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(4,13,8,.65),rgba(11,30,18,.5));"></div>
+  <div class="opener" style="z-index:2;">
+    <div class="section-num">03 / 04</div>
+    <div class="giant" style="color:#4ecdc4;font-size:clamp(52px,10vw,130px);">Web3</div>
+    <div class="rule-c"></div>
+    <p class="subline" style="max-width:500px;margin:0 auto;font-size:clamp(14px,1.5vw,20px);font-weight:400;">Loyaliteit die je écht bezit. Beloond worden voor goed gedrag.</p>
+  </div>
+</div>
+
+<!-- ══════ S14 GROW TOKENS ══════ -->
+<div class="slide bg-s14" id="s14">
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">Web3 · Loyaliteit</div>
+      <h2 class="headline-sm">Grow Tokens — <em>Goed gedrag beloond.</em></h2>
+    </div>
+    <div class="two-col">
+      <div class="col col-text" style="gap:.9vh;">
+        <p class="body-sm" style="font-size:clamp(13px,1.25vw,16px);font-weight:400;">Klanten verdienen digitale Grow Tokens voor elke positieve actie. Tokens staan op de blockchain — transparant, verlopen nooit, volledig eigendom van de klant.</p>
+        <div style="display:flex;flex-direction:column;gap:.4vh;">
+          <div class="token-row"><span>🌱 Route A lopen</span><span class="tok-num">+30 GT</span></div>
+          <div class="token-row"><span>🌿 Duurzame plant kopen</span><span class="tok-num">+20 GT</span></div>
+          <div class="token-row"><span>♻️ Oude pot retourneren</span><span class="tok-num">+15 GT</span></div>
+          <div class="token-row"><span>📚 Workshop bijwonen</span><span class="tok-num">+25 GT</span></div>
+        </div>
+        <p class="body-sm" style="margin-top:.4vh;">Inwisselen voor: <strong style="color:rgba(255,255,255,.8);">10% korting</strong> · <strong style="color:rgba(255,255,255,.8);">gratis workshop</strong> · <strong style="color:rgba(255,255,255,.8);">herbebossing 🌍</strong></p>
+        <p class="body-sm" style="margin-top:.3vh;"><strong style="color:rgba(255,255,255,.75);">Hugo Boss XP:</strong> dubbele ledenaanmeldingen na lancering NFT-loyaliteitsprogramma</p>
+      </div>
+      <div class="col col-img" style="gap:1vh;">
+        <div class="img-ph" id="img-s14-a" style="flex:1.3;min-height:0;">
+          <span class="ph-ico">📱</span><span class="ph-lbl">FOTO A · Hand met Grow Wallet app · 4:3</span><img src="" alt="">
+        </div>
+        <div class="img-ph" id="img-s14-b" style="flex:1;min-height:0;">
+          <span class="ph-ico">📸</span><span class="ph-lbl">FOTO B · Klant scant QR-code bij plant · 4:3</span><img src="" alt="">
+        </div>
+        <div class="img-ph" id="img-s14-c" style="flex:1;min-height:0;">
+          <span class="ph-ico">🏅</span><span class="ph-lbl">FOTO C · Digitaal eigendomsbewijs naast echte plant · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S15 VERGELIJKING ══════ -->
+<div class="slide bg-s15" id="s15">
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">Web3 · Blockchain vs Traditioneel</div>
+      <h2 class="headline-sm">Van spaarpunten naar <em>echte waarde.</em></h2>
+    </div>
+    <div class="compare-wrap">
+      <!-- Old -->
+      <div class="cc cc-old">
+        <div class="cc-head">❌ Traditionele spaarpunten</div>
+        <div class="cc-img">
+          <div class="img-ph" id="img-s15-a" style="height:100%;">
+            <span class="ph-ico">📋</span><span class="ph-lbl">FOTO A · Vergeelde klantenkaart · 4:3</span><img src="" alt="">
+          </div>
+        </div>
+        <div class="cc-bottom">
+          <div class="cmp-item"><span class="cmp-dot cmp-dim"></span>Verlopen na tijd</div>
+          <div class="cmp-item"><span class="cmp-dot cmp-dim"></span>Bedrijf beheert alles</div>
+          <div class="cmp-item"><span class="cmp-dot cmp-dim"></span>Niet overdraagbaar</div>
+          <div class="cmp-item"><span class="cmp-dot cmp-dim"></span>Weinig transparant</div>
+          <div class="cmp-item"><span class="cmp-dot cmp-dim"></span>Slechts 20–30% ingewisseld</div>
+        </div>
+      </div>
+      <!-- New -->
+      <div class="cc cc-new">
+        <div class="cc-head">✓ Grow Tokens · Blockchain</div>
+        <div class="cc-img">
+          <div class="img-ph" id="img-s15-b" style="height:100%;">
+            <span class="ph-ico">💎</span><span class="ph-lbl">FOTO B · Moderne wallet-app op marmeren tafel · 4:3</span><img src="" alt="">
+          </div>
+        </div>
+        <div class="cc-bottom">
+          <div class="cmp-item bright"><span class="cmp-dot cmp-bright"></span>Verlopen nooit</div>
+          <div class="cmp-item bright"><span class="cmp-dot cmp-bright"></span>Klant is eigenaar</div>
+          <div class="cmp-item bright"><span class="cmp-dot cmp-bright"></span>Overdraagbaar &amp; schenkbaar</div>
+          <div class="cmp-item bright"><span class="cmp-dot cmp-bright"></span>Volledig transparant</div>
+          <div class="cmp-item bright"><span class="cmp-dot cmp-bright"></span>+40% klantretentie</div>
+        </div>
+      </div>
+      <!-- Side text -->
+      <div class="cc-side">
+        <div class="glow-box">
+          <p>Geen crypto-kennis nodig. Gewoon een QR-code bij de kassa.</p>
+        </div>
+        <p class="body-sm" style="font-size:clamp(12px,1.2vw,15px);font-weight:300;">Tokens zijn direct inwisselbaar in de winkel. Klant kiest zelf: korting, workshop of bijdrage aan herbebossing.</p>
+        <p class="body-sm" style="font-size:clamp(12px,1.2vw,15px);font-weight:300;"><strong style="color:rgba(255,255,255,.75);">Hugo Boss XP:</strong> dubbele ledenaanmeldingen na lancering NFT-loyaliteitsprogramma</p>
+        <div class="cc-note">Polygon blockchain: snel, goedkoop, duurzaam</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S16 PHYGITALS ══════ -->
+<div class="slide bg-s11" id="s16">
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">Web3 · Digitaal eigendom</div>
+      <h2 class="headline-sm">Jouw plant. <em>Voor altijd van jou.</em></h2>
+    </div>
+    <div class="two-col">
+      <div class="col col-text" style="gap:1vh;">
+        <p class="body-sm">Bij aankoop van een plant ontvang je automatisch een NFT — een uniek digitaal eigendomsbewijs. Dit is het 'digitale DNA' van jouw plant: herkomst, verzorgingshistorie en groeidata.</p>
+        <div class="glow-box">
+          <p style="font-size:clamp(16px,1.9vw,24px);">Terwijl de echte plant in je tuin groeit, groeit de <em>digitale versie</em> mee.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.5vh;margin-top:.3vh;">
+          <div class="mini-card">
+            <div class="mini-card-title">🌱 Plant leeft</div>
+            <div class="mini-card-text">Sensordata voedt de digitale plant — groei zichtbaar in je wallet-app</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-title">🔄 Plant sterft</div>
+            <div class="mini-card-text">NFT blijft bestaan als herinnering — en activeert korting op een nieuwe aankoop</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-title">🎁 Plant schenken</div>
+            <div class="mini-card-text">NFT overdraagbaar — digitaal én fysiek eigendom samen cadeau doen</div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-img" style="gap:1.2vh;">
+        <div class="img-ph" id="img-s16-a" style="flex:1.3;min-height:0;">
+          <span class="ph-ico">📱</span><span class="ph-lbl">FOTO A · Hand met digitale plant wallet-app · 4:3</span><img src="" alt="">
+        </div>
+        <div class="img-ph" id="img-s16-b" style="flex:1;min-height:0;">
+          <span class="ph-ico">🏅</span><span class="ph-lbl">FOTO B · NFT eigendomsbewijs naast echte plant · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S17 ROBOTS OPENER ══════ -->
+<div class="slide bg-s17" id="s17">
+  <div class="opener-glow" style="width:480px;height:480px;background:rgba(100,60,10,.25);top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;"></div>
+  <div class="img-ph" id="img-s17-a" style="position:absolute;inset:0;border:none;border-radius:0;background:transparent;">
+    <span class="ph-ico">🤖</span><span class="ph-lbl">FOTO A · Robot in groene kas tuincentrum · 16:9</span><img src="" alt="">
+  </div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,10,3,.6),rgba(24,21,10,.5));"></div>
+  <!-- FIX: explicit vertical centering, no top-align -->
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:2;">
+    <div class="section-num">04 / 04</div>
+    <div class="giant" style="color:#d4a853;font-size:clamp(38px,7vw,90px);line-height:1;">Sociale<br><em style="color:var(--gold-light);">Robots</em></div>
+    <div class="rule-c"></div>
+    <p class="subline" style="max-width:520px;margin:0 auto;">Het zware werk. Niet het mooie werk.</p>
+  </div>
+</div>
+
+<!-- ══════ S18 ROBOTS IN ROUTES ══════ -->
+<div class="slide bg-s18" id="s18">
+  <div class="sl">
+    <!-- Title block — fixed, does not overlap -->
+    <div class="title-block">
+      <div class="eyebrow">Sociale Robots · De twee routes</div>
+      <h2 class="headline-sm">De robot werkt. <em>De medewerker verbindt.</em></h2>
+    </div>
+    <!-- Highlight bar below title -->
+    <div class="hl-bar">
+      <p>Medewerkers zijn open voor robots die routinetaken overnemen — niet voor robots die klantcontact vervangen. (Veldonderzoek 2025)</p>
+    </div>
+    <!-- Three photos with captions -->
+    <div class="three-photo">
+      <div class="ph-col">
+        <div class="img-ph" id="img-s18-a">
+          <span class="ph-ico">💧</span><span class="ph-lbl">FOTO A · Irrigatierobot tussen klanten · 4:3</span><img src="" alt="">
+        </div>
+        <p class="cap"><strong>1. Route A — Onzichtbaar.</strong> De irrigatierobot rijdt rustig tussen de planten. Klanten lopen er gewoon langs.</p>
+      </div>
+      <div class="ph-col">
+        <div class="img-ph" id="img-s18-b">
+          <span class="ph-ico">📦</span><span class="ph-lbl">FOTO B · Voorraadrobot scant rekken 's nachts · 4:3</span><img src="" alt="">
+        </div>
+        <p class="cap"><strong>2. Nacht — Voorraadbeheer.</strong> Na sluitingstijd scant de robot alle rekken. Resulteert in 20% minder out-of-stocks en 30–50 uur tijdwinst per week voor het personeel.</p>
+      </div>
+      <div class="ph-col">
+        <div class="img-ph" id="img-s18-c">
+          <span class="ph-ico">🤝</span><span class="ph-lbl">FOTO C · Medewerker overhandigt bestelling bij balie · 4:3</span><img src="" alt="">
+        </div>
+        <p class="cap"><strong>3. Route B — Verbinden.</strong> Robot bereidt voor. Medewerker heeft handen en hoofd vrij voor het contact.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S19 HET SJOUW-MAATJE ══════ -->
+<div class="slide bg-s13" id="s19">
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">Sociale Robots · Klantbegeleiding</div>
+      <h2 class="headline-sm">Het <em>sjouw-maatje.</em></h2>
+    </div>
+    <div class="two-col">
+      <div class="col col-text" style="gap:1vh;">
+        <p class="body-sm">Een compacte, vriendelijk ogende robot die de klant volgt als een trouwe hond. Zodra je zware zakken potgrond, grote potten of grindstenen uitkiest, tilt hij ze moeiteloos op zijn laadvlak.</p>
+        <div class="glow-box">
+          <p style="font-size:clamp(16px,1.9vw,24px);">"Jij hebt je handen vrij. De robot het gewicht."</p>
+        </div>
+        <div style="display:flex;gap:1.5vw;flex-shrink:0;margin-top:.5vh;">
+          <div class="stat-block" style="flex:1;"><span class="stat-num">0 kg</span><div class="stat-lbl">Til je zelf</div></div>
+          <div class="stat-block" style="flex:1;"><span class="stat-num">100%</span><div class="stat-lbl">Handen vrij</div></div>
+          <div class="stat-block" style="flex:1;"><span class="stat-num">↑ tijd</span><div class="stat-lbl">Voor winkelen</div></div>
+        </div>
+        <p class="body-sm" style="margin-top:.5vh;">Terwijl jullie lopen, geeft de robot informatie over de producten — zodat de medewerker zich volledig kan richten op persoonlijk contact.</p>
+      </div>
+      <div class="col col-img" style="gap:1.2vh;">
+        <div class="img-ph" id="img-s19-a" style="flex:1;min-height:0;">
+          <span class="ph-ico">🤖</span><span class="ph-lbl">FOTO A · Robot volgt klant met zware potten · 4:3</span><img src="" alt="">
+        </div>
+        <div class="img-ph" id="img-s19-b" style="flex:1;min-height:0;">
+          <span class="ph-ico">🌿</span><span class="ph-lbl">FOTO B · Klant winkelt terwijl robot laadvlak draagt · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S20 DE PLANTENDOKTER ══════ -->
+<div class="slide bg-s14" id="s20">
+  <div class="sl">
+    <div class="title-block">
+      <div class="eyebrow">Sociale Robots · Plantdiagnose</div>
+      <h2 class="headline-sm">De <em>plantendokter.</em></h2>
+    </div>
+    <div class="three-col">
+      <div class="col-third" style="justify-content:flex-start;gap:.8vh;">
+        <div class="mini-card">
+          <div class="mini-card-title">① Detecteren</div>
+          <div class="mini-card-text">De robot rijdt zelfstandig door de winkel. Met geavanceerde camera's analyseert hij planten en detecteert ziektes die het menselijk oog nog niet ziet.</div>
+        </div>
+        <div class="img-ph" id="img-s20-a" style="flex:1;min-height:0;">
+          <span class="ph-ico">🔬</span><span class="ph-lbl">FOTO A · Robot scant ziek blad met camera · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+      <div class="col-third" style="justify-content:flex-start;gap:.8vh;">
+        <div class="mini-card">
+          <div class="mini-card-title">② Uitleggen</div>
+          <div class="mini-card-text">De robot projecteert een hologram van het zieke blad. Het probleemgebied wordt gemarkeerd en de klant begrijpt direct wat er aan de hand is.</div>
+        </div>
+        <div class="img-ph" id="img-s20-b" style="flex:1;min-height:0;">
+          <span class="ph-ico">💡</span><span class="ph-lbl">FOTO B · Hologram diagnose plant · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+      <div class="col-third" style="justify-content:flex-start;gap:.8vh;">
+        <div class="mini-card">
+          <div class="mini-card-title">③ Oplossen</div>
+          <div class="mini-card-text">De robot leidt de klant naar het juiste product in het schap. Een digitaal label licht het exacte product uit dat nodig is voor de behandeling.</div>
+        </div>
+        <div class="img-ph" id="img-s20-c" style="flex:1;min-height:0;">
+          <span class="ph-ico">🌱</span><span class="ph-lbl">FOTO C · Robot wijst naar behandelproduct in schap · 4:3</span><img src="" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ S21 AFSLUITING ══════ -->
+<div class="slide bg-s21" id="s21">
+  <div class="s15-img">
+    <div class="img-ph" id="img-s21-a">
+      <span class="ph-ico">🌟</span><span class="ph-lbl">FOTO A · Tuincentrum 2030: medewerker in gesprek, robot op achtergrond · 16:9</span><img src="" alt="">
+    </div>
+  </div>
+  <div class="overlay"></div>
+  <div class="s15-top">
+    <span class="eyebrow">KV9 · New Digital Technologies · 2030</span>
+    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:5px 12px 5px 8px;">
+      <div style="width:22px;height:22px;background:linear-gradient(135deg,var(--green),var(--green-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;">🌱</div>
+      <div style="font-family:'Jost',sans-serif;font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8);line-height:1.3;">Tuinbranche<br>Nederland</div>
+    </div>
+  </div>
+  <div class="s15-content">
+    <h2 class="headline">Technologie als decor.<br><em>Mens als hoofdrol.</em></h2>
+    <div class="rule-c"></div>
+    <div class="icon-row">
+      <div class="icon-block"><span class="icon-char">◈</span><div class="icon-word">AI · Onzichtbaar</div></div>
+      <div class="icon-block"><span class="icon-char">◉</span><div class="icon-word">AR/VR · Beleving</div></div>
+      <div class="icon-block"><span class="icon-char">◎</span><div class="icon-word">Web3 · Loyaliteit</div></div>
+      <div class="icon-block"><span class="icon-char">◇</span><div class="icon-word">Robots · Vrijheid</div></div>
+    </div>
+    <p class="subline" style="margin-top:2vh;font-size:clamp(10px,.9vw,12px);opacity:.45;">Tuinbranche Nederland · KV9 New Digital Technologies · 2030</p>
+  </div>
+</div>
+
+</div><!-- end deck -->
+
+<nav class="nav">
+  <button class="nav-btn" onclick="prev()">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-btn" onclick="next()">→</button>
+  <span class="nav-counter" id="counter">01 / 21</span>
+</nav>
+
+<script>
+const TOTAL=21;
+let cur=1;
+
+const SECTIONS={1:'',2:'Scenario',3:'Scenario',4:'Scenario',5:'AI',6:'AI',7:'AI',8:'AI',9:'AR/VR',10:'AR/VR',11:'AR/VR',12:'AR/VR',13:'Web3',14:'Web3',15:'Web3',16:'Web3',17:'Robots',18:'Robots',19:'Robots',20:'Robots',21:'Afsluiting'};
+
+const NOTES={
+  1:`<p><strong>Titelslide</strong></p><ul><li>Vak: KV9 New Digital Technologies · Opdrachtgever: Tuinbranche Nederland</li><li>Scenario: De Groene Batterij — hoge energie-autonomie, fysieke winkel centraal · Horizon: 2030</li></ul>`,
+  2:`<p><strong>Toekomstscenario — De matrix</strong></p><ul><li>Twee kernonzekerheden: digitalisering × energie-autonomie</li><li>Bron: Tuinbranche Nederland (2024). Tuinretail 2030.</li><li>Bron: McKinsey & Company (2024). The State of AI in 2024.</li></ul>`,
+  3:`<p><strong>Veldonderzoek — Primaire interviews</strong></p><ul><li>3 medewerkers geïnterviewd bij een tuincentrum</li><li>Kern: menselijk contact = onderscheidend vermogen</li><li>Primaire bron: eigen veldonderzoek 2025</li></ul>`,
+  4:`<p><strong>Scenario — Van winkel naar energiehub</strong></p><ul><li>Tuincentrum als lokale energiehub voor de buurt</li><li>Zonnepanelen + batterijopslag = energie-autonomie</li><li>Bron: IEA (2024), TNO (2021), WUR (2023)</li></ul>`,
+  5:`<p><strong>AI — Introductie (opener)</strong></p><ul><li>87% retailers: positief effect op omzet na AI-adoptie — gevalideerd 2025</li><li>Bron: Shopify. (2025). AI in Retail: Future Trends and Operations.</li></ul>`,
+  6:`<p><strong>AI — De twee routes</strong></p><ul><li>Route A: IKEA-model, immersive zones, medewerker als gids</li><li>Route B: Click & Collect, 5-10 min, robot bereidt voor</li><li>Bron: Trendwatching (2023). The Great Dematerialization.</li></ul>`,
+  7:`<p><strong>AI — Autonome plantenzorg</strong></p><ul><li>Fermata Croptimus: 25% reductie pesticiden én water</li><li>Bron: Fermata. (2025). Croptimus Sustainability and Efficiency Report.</li></ul>`,
+  8:`<p><strong>AI — Slimme plantenassistent</strong></p><ul><li>AI-labels per plant + tablet-gids voor klanten in de winkel</li><li>Gepersonaliseerd advies op basis van aankoophistorie en tuinprofiel</li><li>Bron: Shopify. (2025). AI in Retail: Future Trends and Operations.</li></ul>`,
+  9:`<p><strong>AR/VR — Introductie (opener)</strong></p><ul><li>AR/VR markt: $200 mrd in 2030, 22% CAGR</li><li>Meta Ray-Ban: 7M+ eenheden 2025</li><li>Bron: PS Market Research (2024), UploadVR (2026)</li></ul>`,
+  10:`<p><strong>AR/VR — Immersive winkelroute</strong></p><ul><li>Licht, geur, geluid en temperatuur per zone</li><li>Stiltehoek bewust leeg: tuinieren = rust</li><li>Bron: Shopify (2025) AR Technology in Retail</li></ul>`,
+  11:`<p><strong>AR/VR — Thuisvisualisatie</strong></p><ul><li>+40% hogere conversie, tot 40% minder retour</li><li>WebAR: geen app nodig, QR-code volstaat</li><li>Bron: Sumit, M. (2025). Medium. · Shopify (2025)</li></ul>`,
+  12:`<p><strong>AR/VR — Gamification & experimenteerzone</strong></p><ul><li>Klant ontwerpt eigen tuin in interactieve VR-zone</li><li>Groei-simulaties, seizoenswisselingen, combinaties testen</li><li>Bron: Shopify (2025) AR Technology in Retail</li></ul>`,
+  13:`<p><strong>Web3 — Introductie (opener)</strong></p><ul><li>Web3 = internet van eigenaarschap via blockchain</li><li>Drie pijlers: Tokens / NFTs / Smart Contracts</li><li>Bron: PYMNTS (2025)</li></ul>`,
+  14:`<p><strong>Web3 — Grow Tokens</strong></p><ul><li>40% hogere klantretentie via NFT-loyaliteit</li><li>Hugo Boss XP: dubbele ledenaanmeldingen</li><li>Bron: NFTBaz (2026), Mintology (2025), BlockEden (2026)</li></ul>`,
+  15:`<p><strong>Web3 — Oud vs Nieuw vergelijking</strong></p><ul><li>Traditionele programma's: 20-30% inwisselpercentage</li><li>Polygon blockchain: snel, goedkoop, duurzaam</li><li>Bron: Mintology (2025), PYMNTS SXSW 2025</li></ul>`,
+  16:`<p><strong>Web3 — Phygitals</strong></p><ul><li>NFT als digitaal eigendomsbewijs bij aankoop plant</li><li>Digitale plant groeit mee op basis van sensordata</li><li>Bron: PYMNTS (2025), BlockEden (2026)</li></ul>`,
+  17:`<p><strong>Sociale Robots — Introductie (opener)</strong></p><ul><li>Operationele robots (taken) vs sociale robots (interactie)</li><li>Klanten waarderen menselijke service hoger dan robot-service</li><li>Bron: International Journal of Social Robotics (2022)</li></ul>`,
+  18:`<p><strong>Robots — In de twee routes</strong></p><ul><li>Simbe Tally: 20% minder out-of-stocks, 30–50 uur tijdwinst/week</li><li>Bron: Simbe Robotics (2025), Automate.org (2026)</li></ul>`,
+  19:`<p><strong>Robots — Het sjouw-maatje</strong></p><ul><li>Robot volgt klant en draagt zware aankopen</li><li>Medewerker heeft handen én aandacht vrij voor contact</li><li>Bron: CustomerThink (2025), TechTimes (2026)</li></ul>`,
+  20:`<p><strong>Robots — De plantendokter</strong></p><ul><li>Mobiele robot detecteert plantziektes met geavanceerde camera's</li><li>Projecteert diagnose, leidt klant naar oplossing</li><li>Bron: International Journal of Social Robotics (2022)</li></ul>`,
+  21:`<p><strong>Afsluiting — Bronnenlijst (APA)</strong></p><ul><li>Automate.org. (2026) · BlockEden. (2026) · CBS (2024/2025)</li><li>Fermata. (2025) · IEA (2024) · McKinsey (2024) · Mintology. (2025)</li><li>NFTBaz. (2026) · PS Market Research. (2024) · Shopify. (2025)</li><li>Simbe Robotics. (2025) · Sumit, M. (2025) · TNO (2021)</li><li>Tuinbranche Nederland (2024) · UploadVR. (2026) · WUR (2023)</li><li>Primaire bron: Veldonderzoek 2025 — 3 interviews medewerkers tuincentrum.</li></ul>`
+};
+
+// Build dots
+const dotsEl=document.getElementById('dots');
+for(let i=1;i<=TOTAL;i++){
+  const d=document.createElement('button');
+  d.className='dot'+(i===1?' active':'');
+  if([1,5,9,13,17].includes(i))d.classList.add('sec');
+  d.onclick=()=>goTo(i);
+  dotsEl.appendChild(d);
+}
+
+// Particles
+(function(){
+  const p=document.getElementById('p1');
+  for(let i=0;i<10;i++){
+    const el=document.createElement('div');
+    el.className='particle';
+    el.style.cssText=`left:${Math.random()*100}%;bottom:${Math.random()*20}%;animation-delay:${Math.random()*6}s;animation-duration:${4+Math.random()*4}s;`;
+    p.appendChild(el);
+  }
+})();
+
+function goTo(n){
+  document.getElementById('s'+cur).classList.remove('active');
+  dotsEl.children[cur-1].classList.remove('active');
+  cur=n;
+  document.getElementById('s'+cur).classList.add('active');
+  dotsEl.children[cur-1].classList.add('active');
+  document.getElementById('counter').textContent=String(cur).padStart(2,'0')+' / '+String(TOTAL).padStart(2,'0');
+  const t=document.getElementById('sec-tag');
+  SECTIONS[cur]?(t.textContent=SECTIONS[cur],t.classList.add('show')):t.classList.remove('show');
+  if(document.getElementById('notes-panel').classList.contains('open'))updateNotes();
+}
+function next(){if(cur<TOTAL)goTo(cur+1);}
+function prev(){if(cur>1)goTo(cur-1);}
+function updateNotes(){document.getElementById('notes-num').textContent=cur;document.getElementById('notes-body').innerHTML=NOTES[cur]||'';}
+function toggleNotes(){const p=document.getElementById('notes-panel');p.classList.toggle('open');if(p.classList.contains('open'))updateNotes();}
+
+// Cursor
+const curEl=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{curEl.style.left=e.clientX+'px';curEl.style.top=e.clientY+'px';});
+
+// Keys + touch
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();next();}
+  if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();prev();}
+  if(e.key==='n'||e.key==='N')toggleNotes();
+  if(e.key==='Escape')document.getElementById('notes-panel').classList.remove('open');
+});
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50){dx<0?next():prev();}});
+
+// ── IMAGE HELPER ──
+// Usage: setImage('img-s1-a', 'images/bestandsnaam.jpg')
+window.setImage=function(id,src){
+  const el=document.getElementById(id);if(!el)return;
+  const img=el.querySelector('img');if(!img)return;
+  img.src=src;
+  img.onload=()=>el.classList.add('loaded');
+};
+
+// ── AFBEELDINGEN ──
+window.addEventListener('load',()=>{
+  // S1 - Titelslide
+  setImage('img-s1-a',  '1.png');
+  // S2 - Scenario matrix
+  setImage('img-s2-a',  '2.png');
+  // S3 - Medewerkers interviews
+  setImage('img-s3-a',  '3.png');
+  setImage('img-s3-b',  '4.png');
+  // S4 - Scenario energiehub
+  setImage('img-s4-a',  '33.png');
+  setImage('img-s4-b',  '34.png');
+  // S5 - AI opener
+  setImage('img-s5-a',  '5.png');
+  // S6 - Twee routes
+  setImage('img-s6-a',  '6.png');
+  setImage('img-s6-b',  '7.png');
+  setImage('img-s6-c',  '8.png');
+  // S7 - AI plantenzorg
+  setImage('img-s7-a',  '9.png');
+  setImage('img-s7-b',  '10.png');
+  setImage('img-s7-c',  '11.png');
+  setImage('img-s7-d',  '12.png');
+  setImage('img-s7-e',  '13.png');
+  setImage('img-s7-f',  '14.png');
+  // S8 - AI plantenassistent
+  setImage('img-s8-a',  '35.png');
+  setImage('img-s8-b',  '36.png');
+  // S9 - AR/VR opener
+  setImage('img-s9-a',  '15.png');
+  // S10 - Immersive winkelroute
+  setImage('img-s10-a', '16.png');
+  setImage('img-s10-b', '17.png');
+  setImage('img-s10-c', '18.png');
+  // S11 - AR thuisvisualisatie
+  setImage('img-s11-a', '19.png');
+  setImage('img-s11-b', '20.png');
+  // S12 - AR Gamification
+  setImage('img-s12-a', '37.png');
+  setImage('img-s12-b', '38.png');
+  // S13 - Web3 opener
+  setImage('img-s13-a', '21.png');
+  // S14 - Grow Tokens
+  setImage('img-s14-a', '22.png');
+  setImage('img-s14-b', '23.png');
+  setImage('img-s14-c', '24.png');
+  // S15 - Vergelijking oud vs nieuw
+  setImage('img-s15-a', '26.png');
+  setImage('img-s15-b', '25.png');
+  // S16 - Phygitals
+  setImage('img-s16-a', '39.png');
+  setImage('img-s16-b', '40.png');
+  // S17 - Robots opener
+  setImage('img-s17-a', '32.png');
+  // S18 - Robots in routes
+  setImage('img-s18-a', '28.png');
+  setImage('img-s18-b', '29.png');
+  setImage('img-s18-c', '30.png');
+  // S19 - Sjouw-maatje
+  setImage('img-s19-a', '41.png');
+  setImage('img-s19-b', '42.png');
+  // S20 - Plantendokter
+  setImage('img-s20-a', '43.png');
+  setImage('img-s20-b', '44.png');
+  setImage('img-s20-c', '45.png');
+  // S21 - Afsluiting
+  setImage('img-s21-a', '27.png');
+});
+
+goTo(1);
+</script>
+</body>
+</html>

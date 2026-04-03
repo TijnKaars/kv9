@@ -964,25 +964,28 @@ body{
       <div class="benefit-pill">Geen gokken meer — klanten zien hun tuin zoals die er écht uit gaat zien</div>
       <h2 class="headline-sm">Ontwerp je tuin, nog voor je een plant koopt.</h2>
     </div>
-    <!-- Snake roadmap: rij 1 (stap 1–3 links→rechts) + bocht rechts + rij 2 (stap 4–6 rechts→links) -->
-    <div style="flex:1;display:flex;flex-direction:column;min-height:0;gap:0;position:relative;">
+    <!-- Snake roadmap: 3 kolommen × 2 rijen, snake loopt 1↓2→3↑4→5↓6 -->
+    <div style="flex:1;display:flex;gap:.8vw;min-height:0;position:relative;">
 
-      <!-- Verticale snake-connector rechts: verbindt cirkel stap 3 (boven) met cirkel stap 4 (onder) -->
-      <div style="position:absolute;right:calc(100%/6);top:11px;width:1px;height:calc(50% + .6vh);background:linear-gradient(to bottom,rgba(212,168,83,.5),rgba(212,168,83,.35));z-index:0;pointer-events:none;"></div>
-      <!-- Kleine horizontale verbinding uiterst rechts -->
-      <div style="position:absolute;right:0;top:11px;width:calc(100%/6);height:1px;background:linear-gradient(to left,rgba(212,168,83,0),rgba(212,168,83,.35));z-index:0;pointer-events:none;"></div>
-      <div style="position:absolute;right:0;bottom:calc(50% - .6vh - 11px);width:calc(100%/6);height:1px;background:linear-gradient(to left,rgba(212,168,83,0),rgba(212,168,83,.35));z-index:0;pointer-events:none;"></div>
+      <!-- ── VERBINDINGSLIJNEN ── -->
+      <!-- A: Verticaal kolom 1 (stap 1 → stap 2) -->
+      <div style="position:absolute;left:calc(100%/6);top:11px;width:1px;height:calc(50% + .4vw);background:rgba(212,168,83,.4);z-index:0;pointer-events:none;"></div>
+      <!-- B: Horizontaal onderkant (stap 2 → stap 3) -->
+      <div style="position:absolute;left:calc(100%/6);right:50%;top:calc(50% + .4vw + 11px);height:1px;background:rgba(212,168,83,.4);z-index:0;pointer-events:none;"></div>
+      <!-- C: Verticaal kolom 2 (stap 3 ↑ stap 4) -->
+      <div style="position:absolute;left:50%;top:11px;width:1px;height:calc(50% + .4vw);background:rgba(212,168,83,.4);z-index:0;pointer-events:none;"></div>
+      <!-- D: Horizontaal bovenkant (stap 4 → stap 5) -->
+      <div style="position:absolute;left:50%;right:calc(100%/6);top:11px;height:1px;background:rgba(212,168,83,.4);z-index:0;pointer-events:none;"></div>
+      <!-- E: Verticaal kolom 3 (stap 5 → stap 6) -->
+      <div style="position:absolute;left:calc(5*100%/6);top:11px;width:1px;height:calc(50% + .4vw);background:rgba(212,168,83,.4);z-index:0;pointer-events:none;"></div>
 
-      <!-- Rij 1: Stap 1, 2, 3 (links → rechts) -->
-      <div style="flex:1;display:flex;gap:.8vw;min-height:0;position:relative;padding-bottom:.6vh;">
-        <!-- Horizontale verbindingslijn rij 1 -->
-        <div style="position:absolute;left:calc(100%/6);right:calc(100%/6);top:11px;height:1px;background:rgba(212,168,83,.4);z-index:0;"></div>
-
+      <!-- ── KOLOM 1: Stap 1 (boven) + Stap 2 (onder) ── -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:.8vw;min-height:0;">
         <!-- Stap 1: Foto's thuis -->
         <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3vh;min-height:0;">
           <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.2vh;width:100%;z-index:1;">
             <div style="width:22px;height:22px;border-radius:50%;background:rgba(212,168,83,.15);border:1px solid rgba(212,168,83,.5);display:flex;align-items:center;justify-content:center;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12" style="color:rgba(212,168,83,.9);"><path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+              <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:700;color:rgba(212,168,83,.9);line-height:1;">1</span>
             </div>
             <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.82vw,11px);font-weight:600;color:rgba(212,168,83,.9);text-align:center;line-height:1.2;">Foto's thuis</div>
             <div style="font-family:'Jost',sans-serif;font-size:clamp(7px,.65vw,9px);font-weight:200;color:rgba(255,255,255,.4);text-align:center;line-height:1.25;">Maak foto's van je eigen tuin</div>
@@ -991,12 +994,11 @@ body{
             <span class="ph-ico">🌿</span><span class="ph-lbl">s10-foto-a</span><img src="" alt="">
           </div>
         </div>
-
         <!-- Stap 2: Adres invullen -->
         <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3vh;min-height:0;">
           <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.2vh;width:100%;z-index:1;">
             <div style="width:22px;height:22px;border-radius:50%;background:rgba(212,168,83,.15);border:1px solid rgba(212,168,83,.5);display:flex;align-items:center;justify-content:center;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12" style="color:rgba(212,168,83,.9);"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+              <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:700;color:rgba(212,168,83,.9);line-height:1;">2</span>
             </div>
             <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.82vw,11px);font-weight:600;color:rgba(212,168,83,.9);text-align:center;line-height:1.2;">Adres invullen</div>
             <div style="font-family:'Jost',sans-serif;font-size:clamp(7px,.65vw,9px);font-weight:200;color:rgba(255,255,255,.4);text-align:center;line-height:1.25;">Woonadres bij het tuincentrum</div>
@@ -1005,12 +1007,28 @@ body{
             <span class="ph-ico">🌿</span><span class="ph-lbl">s10-foto-b</span><img src="" alt="">
           </div>
         </div>
+      </div>
 
-        <!-- Stap 3: Satellietdata -->
+      <!-- ── KOLOM 2: Stap 4 (boven) + Stap 3 (onder) ── snake loopt van onder naar boven -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:.8vw;min-height:0;">
+        <!-- Stap 4: 3D-ontwerp (staat boven, want snake komt van onder) -->
         <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3vh;min-height:0;">
           <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.2vh;width:100%;z-index:1;">
             <div style="width:22px;height:22px;border-radius:50%;background:rgba(212,168,83,.15);border:1px solid rgba(212,168,83,.5);display:flex;align-items:center;justify-content:center;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12" style="color:rgba(212,168,83,.9);"><path d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/></svg>
+              <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:700;color:rgba(212,168,83,.9);line-height:1;">4</span>
+            </div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.82vw,11px);font-weight:600;color:rgba(212,168,83,.9);text-align:center;line-height:1.2;">3D-ontwerp</div>
+            <div style="font-family:'Jost',sans-serif;font-size:clamp(7px,.65vw,9px);font-weight:200;color:rgba(255,255,255,.4);text-align:center;line-height:1.25;">Personaliseer je droomtuin</div>
+          </div>
+          <div class="img-ph" id="s10-foto-d" style="flex:1;width:100%;min-height:0;">
+            <span class="ph-ico">🌿</span><span class="ph-lbl">s10-foto-d</span><img src="" alt="">
+          </div>
+        </div>
+        <!-- Stap 3: Satellietdata (staat onder, snake-ingang van kolom 1) -->
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3vh;min-height:0;">
+          <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.2vh;width:100%;z-index:1;">
+            <div style="width:22px;height:22px;border-radius:50%;background:rgba(212,168,83,.15);border:1px solid rgba(212,168,83,.5);display:flex;align-items:center;justify-content:center;">
+              <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:700;color:rgba(212,168,83,.9);line-height:1;">3</span>
             </div>
             <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.82vw,11px);font-weight:600;color:rgba(212,168,83,.9);text-align:center;line-height:1.2;">Satellietdata</div>
             <div style="font-family:'Jost',sans-serif;font-size:clamp(7px,.65vw,9px);font-weight:200;color:rgba(255,255,255,.4);text-align:center;line-height:1.25;">Afmetingen & zonsinval berekend</div>
@@ -1021,30 +1039,13 @@ body{
         </div>
       </div>
 
-      <!-- Rij 2: Stap 4, 5, 6 — omgekeerde volgorde (row-reverse): 4 rechts, 5 midden, 6 links -->
-      <div style="flex:1;display:flex;gap:.8vw;min-height:0;position:relative;flex-direction:row-reverse;padding-top:.6vh;">
-        <!-- Horizontale verbindingslijn rij 2 -->
-        <div style="position:absolute;left:calc(100%/6);right:calc(100%/6);top:calc(.6vh + 11px);height:1px;background:rgba(212,168,83,.4);z-index:0;"></div>
-
-        <!-- Stap 4: 3D-ontwerp (verschijnt rechts) -->
+      <!-- ── KOLOM 3: Stap 5 (boven) + Stap 6 (onder) ── -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:.8vw;min-height:0;">
+        <!-- Stap 5: VR-bril op -->
         <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3vh;min-height:0;">
           <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.2vh;width:100%;z-index:1;">
             <div style="width:22px;height:22px;border-radius:50%;background:rgba(212,168,83,.15);border:1px solid rgba(212,168,83,.5);display:flex;align-items:center;justify-content:center;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12" style="color:rgba(212,168,83,.9);"><path d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
-            </div>
-            <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.82vw,11px);font-weight:600;color:rgba(212,168,83,.9);text-align:center;line-height:1.2;">3D-ontwerp</div>
-            <div style="font-family:'Jost',sans-serif;font-size:clamp(7px,.65vw,9px);font-weight:200;color:rgba(255,255,255,.4);text-align:center;line-height:1.25;">Personaliseer je droomtuin</div>
-          </div>
-          <div class="img-ph" id="s10-foto-d" style="flex:1;width:100%;min-height:0;">
-            <span class="ph-ico">🌿</span><span class="ph-lbl">s10-foto-d</span><img src="" alt="">
-          </div>
-        </div>
-
-        <!-- Stap 5: VR-bril (verschijnt midden) -->
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3vh;min-height:0;">
-          <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.2vh;width:100%;z-index:1;">
-            <div style="width:22px;height:22px;border-radius:50%;background:rgba(212,168,83,.15);border:1px solid rgba(212,168,83,.5);display:flex;align-items:center;justify-content:center;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12" style="color:rgba(212,168,83,.9);"><path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:700;color:rgba(212,168,83,.9);line-height:1;">5</span>
             </div>
             <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.82vw,11px);font-weight:600;color:rgba(212,168,83,.9);text-align:center;line-height:1.2;">VR-bril op</div>
             <div style="font-family:'Jost',sans-serif;font-size:clamp(7px,.65vw,9px);font-weight:200;color:rgba(255,255,255,.4);text-align:center;line-height:1.25;">Loop door je eigen tuin</div>
@@ -1053,12 +1054,11 @@ body{
             <span class="ph-ico">🌿</span><span class="ph-lbl">s10-foto-e</span><img src="" alt="">
           </div>
         </div>
-
-        <!-- Stap 6: Bestellen (verschijnt links) -->
+        <!-- Stap 6: Bestellen (groen — eindpunt) -->
         <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3vh;min-height:0;">
           <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.2vh;width:100%;z-index:1;">
             <div style="width:22px;height:22px;border-radius:50%;background:rgba(82,180,100,.3);border:1px solid rgba(82,180,100,.7);display:flex;align-items:center;justify-content:center;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12" style="color:rgba(130,200,155,.95);"><path d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+              <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:700;color:rgba(130,200,155,.95);line-height:1;">6</span>
             </div>
             <div style="font-family:'Jost',sans-serif;font-size:clamp(9px,.82vw,11px);font-weight:700;color:rgba(130,200,155,.95);text-align:center;line-height:1.2;">Bestellen</div>
             <div style="font-family:'Jost',sans-serif;font-size:clamp(7px,.65vw,9px);font-weight:200;color:rgba(255,255,255,.4);text-align:center;line-height:1.25;">Alles in één keer bestellen</div>
